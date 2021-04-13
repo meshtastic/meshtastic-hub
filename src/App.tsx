@@ -1,39 +1,45 @@
-import React, { useState, useEffect } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from 'react';
 
-interface AppProps {}
+import DataTable from './Components/DataTable/DataTable';
+import Map from './Components/Map';
+import type { NodeDataProperties } from './Components/Sidebar/Node';
+import Sidebar from './Components/Sidebar/Sidebar';
 
-function App({}: AppProps) {
-  // Create the count state.
-  const [count, setCount] = useState(0);
-  // Create the counter (+1 every second).
+function App() {
+  let [nodes, setNodes] = useState({} as GeoJSON.FeatureCollection);
+
   useEffect(() => {
-    const timer = setTimeout(() => setCount(count + 1), 1000);
-    return () => clearTimeout(timer);
-  }, [count, setCount]);
-  // Return the App component.
+    setInterval(async () => {
+      fetch('http://hub.meshtastic.org/v1/geoJSON/nodes')
+        .then((response) => response.json())
+        .then((data) => {
+          setNodes(data);
+        });
+    }, 3000);
+  }, []);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <p>
-          Page has been open for <code>{count}</code> seconds.
-        </p>
-        <p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </p>
-      </header>
+    <div className="w-screen h-screen max-h-screen flex flex-col">
+      <div className="flex relative h-full overflow-hidden">
+        <Map nodes={nodes} />
+        <Sidebar
+          nodes={
+            Object.keys(nodes).length
+              ? nodes.features.map((node) => {
+                  return node.properties as NodeDataProperties;
+                })
+              : []
+          }
+        />
+        <DataTable
+          nodes={
+            Object.keys(nodes).length
+              ? nodes.features.map((node) => {
+                  return node.properties as NodeDataProperties;
+                })
+              : []
+          }
+        />
+      </div>
     </div>
   );
 }
