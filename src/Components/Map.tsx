@@ -6,6 +6,12 @@ import mapboxgl from 'mapbox-gl';
 
 export interface MapProps {
   nodes: GeoJSON.FeatureCollection;
+  setPosition: React.Dispatch<
+    React.SetStateAction<{
+      lat: number;
+      lng: number;
+    }>
+  >;
 }
 const Map = (props: MapProps) => {
   mapboxgl.accessToken =
@@ -95,29 +101,22 @@ const Map = (props: MapProps) => {
       });
 
       map.on('move', () => {
-        setLng(parseFloat(map.getCenter().lng.toPrecision(4)));
-        setLat(parseFloat(map.getCenter().lat.toPrecision(4)));
+        const currentLat = parseFloat(map.getCenter().lat.toPrecision(4));
+        const currentLng = parseFloat(map.getCenter().lng.toPrecision(4));
+        setLng(currentLng);
+        setLat(currentLat);
         setZoom(parseFloat(map.getZoom().toPrecision(4)));
+        props.setPosition({
+          lat: currentLat,
+          lng: currentLng,
+        });
       });
     };
 
     !map && attachMap(setMap, mapDiv);
   }, [map]);
 
-  return (
-    // <div className="relative">
-    <>
-      <div className="w-screen h-screen flex-grow" ref={mapDiv} />
-      <div className="flex fixed w-80 h-12 right-8 bottom-8 bg-gray-700 rounded-md ">
-        <div className="m-auto text-white text-xl">
-          Lat: <small>{lat}</small>, Lng: <small>{lng}</small>, Zoom:{' '}
-          <small>{zoom}</small>
-        </div>
-      </div>
-    </>
-    //
-    // </div>
-  );
+  return <div className="w-screen h-screen flex-grow" ref={mapDiv} />;
 };
 
 export default Map;

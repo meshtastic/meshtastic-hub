@@ -10,15 +10,15 @@ const Badge = (props: BadgeProps) => {
     <span
       className={`relative inline-block px-3 py-1 font-semibold leading-tight ${
         props.variant === 'Primary'
-          ? 'text-blue-900'
+          ? 'text-blue-900 dark:text-blue-200'
           : props.variant === 'Warning'
-          ? 'text-yellow-900'
+          ? 'text-yellow-900 dark:text-yellow-200'
           : props.variant === 'Danger'
-          ? 'text-red-900'
+          ? 'text-red-900 dark:text-red-200'
           : props.variant === 'Success'
-          ? 'text-green-900'
+          ? 'text-green-900 dark:text-green-200'
           : props.variant === 'Neutral'
-          ? 'text-gray-900'
+          ? 'text-gray-900 dark:text-gray-200'
           : null
       }`}
     >
@@ -26,15 +26,15 @@ const Badge = (props: BadgeProps) => {
         aria-hidden="true"
         className={`absolute inset-0 opacity-50 rounded-full ${
           props.variant === 'Primary'
-            ? 'bg-blue-200'
+            ? 'bg-blue-200 dark:bg-blue-500'
             : props.variant === 'Warning'
-            ? 'bg-yellow-200'
+            ? 'bg-yellow-200 dark:bg-yellow-500'
             : props.variant === 'Danger'
-            ? 'bg-red-200'
+            ? 'bg-red-200 dark:bg-red-500'
             : props.variant === 'Success'
-            ? 'bg-green-200'
+            ? 'bg-green-200 dark:bg-green-500'
             : props.variant === 'Neutral'
-            ? 'bg-gray-200'
+            ? 'bg-gray-200 dark:bg-gray-500'
             : null
         }`}
       ></span>

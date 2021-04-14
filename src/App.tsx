@@ -6,7 +6,15 @@ import type { NodeDataProperties } from './Components/Sidebar/Node';
 import Sidebar from './Components/Sidebar/Sidebar';
 
 function App() {
-  let [nodes, setNodes] = useState({} as GeoJSON.FeatureCollection);
+  const [nodes, setNodes] = useState({} as GeoJSON.FeatureCollection);
+  const [currentPosition, setCurrentPosition] = useState<{
+    lat: number;
+    lng: number;
+  }>({
+    lat: 0,
+    lng: 0,
+  });
+  const [darkmode, setDarkmode] = useState<boolean>(false);
 
   useEffect(() => {
     setInterval(async () => {
@@ -18,9 +26,18 @@ function App() {
     }, 3000);
   }, []);
   return (
-    <div className="w-screen h-screen max-h-screen flex flex-col">
+    <div
+      className={`w-screen h-screen max-h-screen flex flex-col ${
+        darkmode ? 'dark' : null
+      }`}
+    >
       <div className="flex relative h-full overflow-hidden">
-        <Map nodes={nodes} />
+        <Map
+          nodes={nodes}
+          setPosition={(data) => {
+            setCurrentPosition(data);
+          }}
+        />
         <Sidebar
           nodes={
             Object.keys(nodes).length
@@ -29,6 +46,11 @@ function App() {
                 })
               : []
           }
+          currentPosition={currentPosition}
+          darkmode={darkmode}
+          setDarkmode={(data: any) => {
+            setDarkmode(data);
+          }}
         />
         <DataTable
           nodes={
@@ -38,6 +60,7 @@ function App() {
                 })
               : []
           }
+          loading={!Object.keys(nodes).length}
         />
       </div>
     </div>

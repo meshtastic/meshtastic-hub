@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import { FaArrowsAltV, FaMapMarkedAlt } from 'react-icons/fa';
+import { FaMapMarkedAlt, FaSort } from 'react-icons/fa';
 
 export interface DropdownProps {
   // options:
@@ -9,10 +9,10 @@ export interface DropdownProps {
 const Dropdown = () => {
   const [isOpen, setIsOpen] = useState(false);
   return (
-    <div className="px-3 pb-3 relative">
+    <div className="px-2 pb-2 relative">
       <button
         type="button"
-        className="relative w-full bg-white rounded-md shadow-lg pl-3 pr-10 py-3 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+        className="relative w-full rounded-md border shadow-md p-1 text-left cursor-default focus:outline-none"
         onClick={() => {
           setIsOpen(!isOpen);
         }}
@@ -23,15 +23,15 @@ const Dropdown = () => {
             alt="person"
             className="flex-shrink-0 h-6 w-6 rounded-full"
           /> */}
-          <FaMapMarkedAlt />
+          <FaMapMarkedAlt className="text-gray-600" />
           <span className="ml-3 block truncate">Satellite</span>
         </span>
         <span className="ml-3 absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
-          <FaArrowsAltV />
+          <FaSort className="text-gray-600 text-sm" />
         </span>
       </button>
       {isOpen ? (
-        <div className="absolute mt-1 w-full z-10 rounded-md bg-white shadow-lg">
+        <div className="absolute mt-1 w-full z-10 rounded-md bg-white shadow-md">
           <ul
             tabIndex={-1}
             role="listbox"

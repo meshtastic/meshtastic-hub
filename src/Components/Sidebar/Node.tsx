@@ -8,21 +8,21 @@ export interface NodeProps {
 
 export interface NodeDataProperties {
   id: string;
-  lastHeard: number;
-  longName: string;
-  position: {
-    altitude: number;
-    batteryLevel: number;
-    latitudeI: number;
-    longitudeI: number;
-    time: number;
+  lastHeard?: number;
+  longName?: string;
+  position?: {
+    altitude?: number;
+    batteryLevel?: number;
+    latitudeI?: number;
+    longitudeI?: number;
+    time?: number;
   };
-  user: {
-    hwModel: string; //enum
-    id: string;
-    longName: string;
-    macaddr: string;
-    shortName: string;
+  user?: {
+    hwModel?: string; //enum
+    id?: string;
+    longName?: string;
+    macaddr?: string;
+    shortName?: string;
   };
 }
 
@@ -49,7 +49,7 @@ const Node = (props: NodeProps) => {
       </div>
 
       {dropdownOpen ? (
-        <div className="border-b p-2">{props.node.user.hwModel}</div>
+        <div className="border-b p-2">{props.node?.user?.hwModel}</div>
       ) : null}
     </div>
   );
