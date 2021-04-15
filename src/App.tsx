@@ -18,7 +18,7 @@ function App() {
 
   useEffect(() => {
     setInterval(async () => {
-      fetch('http://hub.meshtastic.org/v1/geoJSON/nodes')
+      fetch('https://hub.meshtastic.org/v1/geoJSON/nodes')
         .then((response) => response.json())
         .then((data) => {
           setNodes(data);
