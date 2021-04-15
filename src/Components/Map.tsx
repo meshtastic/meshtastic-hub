@@ -6,6 +6,7 @@ import mapboxgl from 'mapbox-gl';
 
 export interface MapProps {
   nodes: GeoJSON.FeatureCollection;
+  darkmode: boolean;
   setPosition: React.Dispatch<
     React.SetStateAction<{
       lat: number;
@@ -22,6 +23,14 @@ const Map = (props: MapProps) => {
   const [lat, setLat] = useState(42.35);
   const [zoom, setZoom] = useState(9);
   const [mapLoaded, setMapLoaded] = useState(false);
+
+  useEffect(() => {
+    map?.setStyle(
+      props.darkmode
+        ? 'mapbox://styles/mapbox/dark-v10'
+        : 'mapbox://styles/mapbox/light-v10',
+    );
+  }, [props.darkmode]);
 
   useEffect(() => {
     if (mapLoaded && map) {
@@ -70,7 +79,12 @@ const Map = (props: MapProps) => {
       }
       const map = new mapboxgl.Map({
         container: mapDiv.current || '',
-        style: 'mapbox://styles/mapbox/satellite-v9',
+        // style: 'mapbox://styles/mapbox/satellite-v9',
+        // style: 'mapbox://styles/mapbox/light-v10',
+        // style: 'mapbox://styles/mapbox/dark-v10',
+        style: props.darkmode
+          ? 'mapbox://styles/mapbox/dark-v10'
+          : 'mapbox://styles/mapbox/light-v10',
         center: [lng, lat],
 
         zoom: zoom,

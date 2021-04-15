@@ -34,6 +34,7 @@ function App() {
       <div className="flex relative h-full overflow-hidden">
         <Map
           nodes={nodes}
+          darkmode={darkmode}
           setPosition={(data) => {
             setCurrentPosition(data);
           }}
