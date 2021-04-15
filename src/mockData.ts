@@ -77,3 +77,11 @@ export const mockNodeData = {
   },
   longName: 'Beth Pedersen adb0',
 };
+
+export const mockSidebarData = {
+  currentPosition: {
+    lat: 36.46,
+    lng: -98.24,
+  },
+  darkmode: false
+};
