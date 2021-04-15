@@ -1,6 +1,7 @@
 import React from 'react';
 
-import logo from '../../../public/Mesh_Logo_Black.svg';
+import logoBlack from '../../../public/Mesh_Logo_Black.svg';
+import logoWhite from '../../../public/Mesh_Logo_White.svg';
 import Dropdown from '../Generic/Dropdown';
 import type { NodeDataProperties } from './Node';
 
@@ -19,7 +20,7 @@ const Sidebar = (props: SidebarProps) => {
     <div className="absolute right-0 hidden lg:block my-4 ml-4 shadow-lg w-56 mr-4">
       <div className="bg-white h-full rounded-md dark:bg-gray-700">
         <div className="flex items-center justify-center pt-6">
-          <img className="w-14" src={logo} />
+          <img className="w-14" src={props.darkmode ? logoWhite : logoBlack} />
         </div>
         <nav className="mt-6">
           <div>
