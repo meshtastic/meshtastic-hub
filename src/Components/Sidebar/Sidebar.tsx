@@ -2,6 +2,7 @@ import React from 'react';
 
 import logoBlack from '../../../public/Mesh_Logo_Black.svg';
 import logoWhite from '../../../public/Mesh_Logo_White.svg';
+import DarkmodeToggle from '../Generic/DarkmodeToggle';
 import Dropdown from '../Generic/Dropdown';
 import type { NodeDataProperties } from './Node';
 
@@ -37,18 +38,16 @@ const Sidebar = (props: SidebarProps) => {
             </div>
           </div>
 
-          <div className="flex">
-            <div className="flex w-full mx-2 mb-2 shadow-md border rounded-md">
-              <div className="mx-auto text-lg dark:text-gray-200">
-                <button
-                  onClick={() => {
-                    props.setDarkmode(!props.darkmode);
-                  }}
-                >
-                  Toggle darkmode
-                </button>
-              </div>
+          <div className="flex pb-2 justify-between mx-2">
+            <div className="text-gray-600 dark:text-gray-100 mr-2 text-xl my-auto font-medium">
+              Theme:
             </div>
+            <DarkmodeToggle
+              darkmode={props.darkmode}
+              toggle={() => {
+                props.setDarkmode(!props.darkmode);
+              }}
+            />
           </div>
         </nav>
       </div>

@@ -27,7 +27,7 @@ function App() {
   }, []);
   return (
     <div
-      className={`w-screen h-screen max-h-screen flex flex-col ${
+      className={`w-screen h-screen select-none max-h-screen flex flex-col ${
         darkmode ? 'dark' : null
       }`}
     >
