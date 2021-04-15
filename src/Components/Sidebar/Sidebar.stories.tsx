@@ -2,7 +2,7 @@ import React from 'react';
 
 import type { Meta, Story } from '@storybook/react';
 
-import { mockNodesData } from '../../../src/mockData';
+import { mockNodesData, mockSidebarData } from '../../../src/mockData';
 import Sidebar, { SidebarProps } from './Sidebar';
 
 export default {
@@ -14,5 +14,6 @@ const Template: Story<SidebarProps> = (args) => <Sidebar {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {
+  ...mockSidebarData,
   nodes: mockNodesData,
 };

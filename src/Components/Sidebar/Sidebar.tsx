@@ -24,13 +24,13 @@ const Sidebar = (props: SidebarProps) => {
         </div>
         <nav className="mt-6">
           <div>
-            <span className="mx-2 text-sm">Map Type</span>
+            <span className="mx-2 text-sm dark:text-gray-200">Map Type</span>
             <Dropdown />
           </div>
 
           <div className="flex">
             <div className="flex w-full mx-2 mb-2 shadow-md border rounded-md">
-              <div className="mx-auto text-lg ">
+              <div className="mx-auto text-lg dark:text-gray-200">
                 Lat: <small>{props.currentPosition.lat}</small>, Lng:{' '}
                 <small>{props.currentPosition.lng}</small>
               </div>
@@ -39,7 +39,7 @@ const Sidebar = (props: SidebarProps) => {
 
           <div className="flex">
             <div className="flex w-full mx-2 mb-2 shadow-md border rounded-md">
-              <div className="mx-auto text-lg ">
+              <div className="mx-auto text-lg dark:text-gray-200">
                 <button
                   onClick={() => {
                     props.setDarkmode(!props.darkmode);

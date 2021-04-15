@@ -23,11 +23,11 @@ const Dropdown = () => {
             alt="person"
             className="flex-shrink-0 h-6 w-6 rounded-full"
           /> */}
-          <FaMapMarkedAlt className="text-gray-600" />
-          <span className="ml-3 block truncate">Satellite</span>
+          <FaMapMarkedAlt className="text-gray-600 dark:text-gray-200" />
+          <span className="ml-3 block truncate dark:text-gray-200">Satellite</span>
         </span>
         <span className="ml-3 absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
-          <FaSort className="text-gray-600 text-sm" />
+          <FaSort className="text-sm text-gray-600 dark:text-gray-200" />
         </span>
       </button>
       {isOpen ? (
