@@ -27,23 +27,29 @@ const TableEntry = (props: TableEntryProps) => {
               <FaMicrochip className="mx-auto" />
             </div>
             <div className="ml-3">
-              <p className="whitespace-no-wrap">
-                {props.node.user?.id ? props.node.user?.id : 'Undefined'}
-              </p>
+              {props.node.user?.id ? (
+                <p className="whitespace-no-wrap">{props.node.user.id}</p>
+              ) : (
+                <Badge message="Unknown" variant="Neutral" />
+              )}
             </div>
           </div>
         </td>
         <td className=" text-gray-900 dark:text-gray-200 px-5 py-1 text-sm">
-          <p className="whitespace-no-wrap">
-            {props.node.user?.macaddr ? props.node.user.macaddr : 'Undefined'}
-          </p>
+          {props.node.user?.macaddr ? (
+            <p className="whitespace-no-wrap">{props.node.user.macaddr}</p>
+          ) : (
+            <Badge message="Unknown" variant="Neutral" />
+          )}
         </td>
         <td className=" text-gray-900 dark:text-gray-200 px-5 py-1 text-sm">
-          <p className="whitespace-no-wrap">
-            {props.node.position?.time
-              ? new Date(props.node.position.time * 1000).toLocaleTimeString()
-              : 'Undefined'}
-          </p>
+          {props.node.position?.time ? (
+            <p className="whitespace-no-wrap">
+              {new Date(props.node.position.time * 1000).toLocaleTimeString()}
+            </p>
+          ) : (
+            <Badge message="Unknown" variant="Neutral" />
+          )}
         </td>
         <td className=" text-gray-900 dark:text-gray-200 px-5 py-1 text-sm">
           {props.node.position?.batteryLevel ? (
@@ -64,7 +70,7 @@ const TableEntry = (props: TableEntryProps) => {
               />
             )
           ) : (
-            <Badge message="Undefined" variant="Neutral" />
+            <Badge message="Unknown" variant="Neutral" />
           )}
         </td>
       </tr>
