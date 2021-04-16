@@ -6,8 +6,8 @@ import { MapStyle, MapStyles } from '../../MapStyle';
 import DropdownOption from './DropdownOption';
 
 export interface DropdownProps {
-  selectedMapStyle: MapStyle;
-  setSelectedMapStyle: Function;
+  mapStyle: MapStyle;
+  setMapStyle: Function;
 }
 
 const Dropdown = (props: DropdownProps) => {
@@ -29,7 +29,7 @@ const Dropdown = (props: DropdownProps) => {
             className="flex-shrink-0 h-6 w-6 rounded-full"
           /> */}
           <FaMapMarkedAlt className="text-gray-600 dark:text-gray-200" />
-          <span className="ml-3 block truncate dark:text-gray-200">{props.selectedMapStyle.title}</span>
+          <span className="ml-3 block truncate dark:text-gray-200">{props.mapStyle.title}</span>
         </span>
         <span className="ml-3 absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
           <FaSort className="text-sm text-gray-600 dark:text-gray-200" />
@@ -48,8 +48,8 @@ const Dropdown = (props: DropdownProps) => {
                 <DropdownOption
                   key={index}
                   mapStyle={mapStyle}
-                  setSelectedMapStyle={(data: MapStyle) => {
-                    props.setSelectedMapStyle(data);
+                  setMapStyle={(data: MapStyle) => {
+                    props.setMapStyle(data);
                     setIsOpen(!isOpen);
                   }} 
                 />

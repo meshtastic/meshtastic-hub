@@ -4,7 +4,7 @@ import type { MapStyle } from '../../MapStyle';
 
 export interface DropdownOptionProps {
   mapStyle: MapStyle;
-  setSelectedMapStyle: Function;
+  setMapStyle: Function;
 }
 
 const DropdownOption = (props: DropdownOptionProps) => {
@@ -13,7 +13,7 @@ const DropdownOption = (props: DropdownOptionProps) => {
       role="option"
       className="text-gray-900 cursor-default hover:bg-indigo-500 hover:text-white select-none relative py-2 pl-3 pr-9"
       onClick={() => {
-        props.setSelectedMapStyle(props.mapStyle);
+        props.setMapStyle(props.mapStyle);
       }}
     >
       <div className="flex items-center">

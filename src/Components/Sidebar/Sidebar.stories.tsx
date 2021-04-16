@@ -17,5 +17,5 @@ export const Default = Template.bind({});
 Default.args = {
   ...mockSidebarData,
   nodes: mockNodesData,
-  selectedMapStyle: MapStyles.Light,
+  mapStyle: MapStyles.Light,
 };

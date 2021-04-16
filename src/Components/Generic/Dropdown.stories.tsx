@@ -14,5 +14,5 @@ const Template: Story<DropdownProps> = (args) => <Dropdown {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {
-  selectedMapStyle: MapStyles.Light
+  mapStyle: MapStyles.Light
 };

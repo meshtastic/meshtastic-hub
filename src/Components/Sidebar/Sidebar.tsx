@@ -16,8 +16,8 @@ export interface SidebarProps {
   };
   darkmode: boolean;
   setDarkmode: Function;
-  selectedMapStyle: MapStyle;
-  setSelectedMapStyle: Function;
+  mapStyle: MapStyle;
+  setMapStyle: Function;
 }
 
 const Sidebar = (props: SidebarProps) => {
@@ -31,9 +31,9 @@ const Sidebar = (props: SidebarProps) => {
           <div>
             <span className="mx-2 text-sm dark:text-gray-200">Map Type</span>
             <Dropdown 
-              selectedMapStyle={props.selectedMapStyle}
-              setSelectedMapStyle={(data: MapStyle) => {
-                props.setSelectedMapStyle(data);
+              mapStyle={props.mapStyle}
+              setMapStyle={(data: MapStyle) => {
+                props.setMapStyle(data);
               }}
             />
           </div>

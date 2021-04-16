@@ -9,6 +9,9 @@ export const MapStyles = {
   Satellite: { title: 'Satellite', url: 'mapbox://styles/mapbox/satellite-v9' } as MapStyle,
 }
 
-export function getDefaultMapStyleForMode (darkmode: Boolean) {
+export function getDefaultMapStyle (darkmode: Boolean, currentMapStyle: MapStyle) {
+  if (currentMapStyle === MapStyles.Satellite) {
+    return MapStyles.Satellite
+  }
   return darkmode ? MapStyles.Dark : MapStyles.Light;
 }
