@@ -18,7 +18,6 @@ const DarkmodeToggle = (props: DarkmodeToggleProps) => {
     <div
       onClick={() => {
         setDarkmode(!darkmode);
-        console.log('clicked');
 
         if (props.toggle) {
           props.toggle();
