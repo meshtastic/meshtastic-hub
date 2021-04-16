@@ -3,6 +3,7 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 import React, { useEffect, useRef, useState } from 'react';
 
 import mapboxgl from 'mapbox-gl';
+import { getDefaultMapStyleForMode, MapStyle } from '../MapStyle';
 
 export interface MapProps {
   nodes: GeoJSON.FeatureCollection;
@@ -13,6 +14,7 @@ export interface MapProps {
       lng: number;
     }>
   >;
+  selectedMapStyle: MapStyle;
 }
 const Map = (props: MapProps) => {
   mapboxgl.accessToken =
@@ -26,11 +28,9 @@ const Map = (props: MapProps) => {
 
   useEffect(() => {
     map?.setStyle(
-      props.darkmode
-        ? 'mapbox://styles/mapbox/dark-v10'
-        : 'mapbox://styles/mapbox/light-v10',
+      props.selectedMapStyle.url,
     );
-  }, [props.darkmode]);
+  }, [props.selectedMapStyle]);
 
   useEffect(() => {
     if (mapLoaded && map) {
@@ -79,14 +79,8 @@ const Map = (props: MapProps) => {
       }
       const map = new mapboxgl.Map({
         container: mapDiv.current || '',
-        // style: 'mapbox://styles/mapbox/satellite-v9',
-        // style: 'mapbox://styles/mapbox/light-v10',
-        // style: 'mapbox://styles/mapbox/dark-v10',
-        style: props.darkmode
-          ? 'mapbox://styles/mapbox/dark-v10'
-          : 'mapbox://styles/mapbox/light-v10',
+        style: getDefaultMapStyleForMode(props.darkmode).url,
         center: [lng, lat],
-
         zoom: zoom,
       });
       setMap(map);

@@ -2,12 +2,17 @@ import React, { useState } from 'react';
 
 import { FaMapMarkedAlt, FaSort } from 'react-icons/fa';
 
+import { MapStyle, MapStyles } from '../../MapStyle';
+import DropdownOption from './DropdownOption';
+
 export interface DropdownProps {
-  // options:
+  selectedMapStyle: MapStyle;
+  setSelectedMapStyle: Function;
 }
 
-const Dropdown = () => {
+const Dropdown = (props: DropdownProps) => {
   const [isOpen, setIsOpen] = useState(false);
+
   return (
     <div className="px-2 pb-2 relative">
       <button
@@ -24,7 +29,7 @@ const Dropdown = () => {
             className="flex-shrink-0 h-6 w-6 rounded-full"
           /> */}
           <FaMapMarkedAlt className="text-gray-600 dark:text-gray-200" />
-          <span className="ml-3 block truncate dark:text-gray-200">Satellite</span>
+          <span className="ml-3 block truncate dark:text-gray-200">{props.selectedMapStyle.title}</span>
         </span>
         <span className="ml-3 absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
           <FaSort className="text-sm text-gray-600 dark:text-gray-200" />
@@ -39,53 +44,16 @@ const Dropdown = () => {
             aria-activedescendant="listbox-item-3"
             className="max-h-56 rounded-md py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm"
           >
-            <li
-              id="listbox-item-0"
-              role="option"
-              className="text-gray-900 cursor-default hover:bg-indigo-500 hover:text-white select-none relative py-2 pl-3 pr-9"
-            >
-              <div className="flex items-center">
-                <img
-                  src="/images/person/1.jpg"
-                  alt="person"
-                  className="flex-shrink-0 h-6 w-6 rounded-full"
+            {Object.entries(MapStyles).map(([_, mapStyle], index) => (
+                <DropdownOption
+                  key={index}
+                  mapStyle={mapStyle}
+                  setSelectedMapStyle={(data: MapStyle) => {
+                    props.setSelectedMapStyle(data);
+                    setIsOpen(!isOpen);
+                  }} 
                 />
-                <span className="ml-3 block font-normal truncate">
-                  Mick Poulaz
-                </span>
-              </div>
-              <span className="absolute inset-y-0 right-0 flex items-center pr-4">
-                <svg
-                  className="h-5 w-5"
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                  aria-hidden="true"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                    clip-rule="evenodd"
-                  ></path>
-                </svg>
-              </span>
-            </li>
-            <li
-              id="listbox-item-1"
-              role="option"
-              className="text-gray-900 cursor-default select-none hover:bg-indigo-500 hover:text-white relative py-2 pl-3 pr-9"
-            >
-              <div className="flex items-center">
-                <img
-                  src="/images/person/1.jpg"
-                  alt="person"
-                  className="flex-shrink-0 h-6 w-6 rounded-full"
-                />
-                <span className="ml-3 block font-normal truncate">
-                  Julien Schiano
-                </span>
-              </div>
-            </li>
+            ))}
           </ul>
         </div>
       ) : null}
