@@ -101,9 +101,13 @@ const DataTable = (props: DataTableProps) => {
     );
   }, [props.nodes, sortBy, sortDirection]);
   return (
-    <div className="z-10 mx-auto absolute left-0 right-0 bottom-0 w-2/3">
+    <div
+      className={`z-10 absolute left-0 right-0 bottom-0 sm:w-full md:w-2/3 lg:1/2 mx-auto transition-transform transform duration-300 ease-in-out overflow-hidden ${
+        dataTableOpen ? '' : 'translate-y-80'
+      }`}
+    >
       <div
-        className="flex group h-8 bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-800 border-gray-300 dark:border-gray-800 rounded-t-md cursor-pointer border-b "
+        className="flex group h-8 bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-800 border-gray-300 dark:border-gray-800 md:rounded-t-md cursor-pointer border-b"
         onClick={() => {
           setDataTableOpen(!dataTableOpen);
         }}
@@ -124,148 +128,144 @@ const DataTable = (props: DataTableProps) => {
           </div>
         </div>
       </div>
-      {dataTableOpen ? (
-        !props.loading ? (
-          <div className="bg-gray-100 dark:bg-gray-600 shadow-inner h-80 overflow-auto">
-            <table className="min-w-full leading-normal">
-              <thead>
-                <tr>
-                  <th
-                    scope="col"
-                    className={`border-gray-200 dark:border-gray-700 hover:bg-gray-300 dark:hover:bg-gray-800 text-gray-800 dark:text-gray-300 px-5 border-b text-left text-sm uppercase font-medium cursor-pointer ${
-                      sortBy === 'Id' ? 'bg-gray-200 dark:bg-gray-700' : null
-                    }`}
-                    onClick={() => {
-                      if (sortBy === 'Id') {
-                        sortDirection === 'ASC'
-                          ? setSortDirection('DEC')
-                          : setSortDirection('ASC');
-                      } else {
-                        setSortBy('Id');
-                        setSortDirection('ASC');
-                      }
-                    }}
-                  >
-                    <div className="flex justify-between">
-                      ID
-                      {sortBy === 'Id' ? (
-                        sortDirection === 'ASC' ? (
-                          <FaCaretDown className="my-auto text-gray-600 dark:text-gray-100" />
-                        ) : (
-                          <FaCaretUp className="my-auto text-gray-600 dark:text-gray-100" />
-                        )
+      {!props.loading ? (
+        <div className="bg-gray-100 dark:bg-gray-600 shadow-inner h-80 overflow-auto">
+          <table className="min-w-full leading-normal">
+            <thead>
+              <tr>
+                <th
+                  scope="col"
+                  className={`border-gray-200 dark:border-gray-700 hover:bg-gray-300 dark:hover:bg-gray-800 text-gray-800 dark:text-gray-300 px-5 border-b text-left text-sm uppercase font-medium cursor-pointer ${
+                    sortBy === 'Id' ? 'bg-gray-200 dark:bg-gray-700' : null
+                  }`}
+                  onClick={() => {
+                    if (sortBy === 'Id') {
+                      sortDirection === 'ASC'
+                        ? setSortDirection('DEC')
+                        : setSortDirection('ASC');
+                    } else {
+                      setSortBy('Id');
+                      setSortDirection('ASC');
+                    }
+                  }}
+                >
+                  <div className="flex justify-between">
+                    ID
+                    {sortBy === 'Id' ? (
+                      sortDirection === 'ASC' ? (
+                        <FaCaretDown className="my-auto text-gray-600 dark:text-gray-100" />
                       ) : (
-                        <FaSort className="my-auto text-gray-600 dark:text-gray-100" />
-                      )}
-                    </div>
-                  </th>
-                  <th
-                    scope="col"
-                    className={`border-gray-200 dark:border-gray-700 hover:bg-gray-300 dark:hover:bg-gray-800 text-gray-800 dark:text-gray-300 px-5 border-b text-left text-sm uppercase font-medium cursor-pointer ${
-                      sortBy === 'Mac' ? 'bg-gray-200 dark:bg-gray-700' : null
-                    }`}
-                    onClick={() => {
-                      if (sortBy === 'Mac') {
-                        sortDirection === 'ASC'
-                          ? setSortDirection('DEC')
-                          : setSortDirection('ASC');
-                      } else {
-                        setSortBy('Mac');
-                        setSortDirection('ASC');
-                      }
-                    }}
-                  >
-                    <div className="flex justify-between">
-                      MAC
-                      {sortBy === 'Mac' ? (
-                        sortDirection === 'ASC' ? (
-                          <FaCaretDown className="my-auto text-gray-600 dark:text-gray-100" />
-                        ) : (
-                          <FaCaretUp className="my-auto text-gray-600 dark:text-gray-100" />
-                        )
+                        <FaCaretUp className="my-auto text-gray-600 dark:text-gray-100" />
+                      )
+                    ) : (
+                      <FaSort className="my-auto text-gray-600 dark:text-gray-100" />
+                    )}
+                  </div>
+                </th>
+                <th
+                  scope="col"
+                  className={`border-gray-200 dark:border-gray-700 hover:bg-gray-300 dark:hover:bg-gray-800 text-gray-800 dark:text-gray-300 px-5 border-b text-left text-sm uppercase font-medium cursor-pointer ${
+                    sortBy === 'Mac' ? 'bg-gray-200 dark:bg-gray-700' : null
+                  }`}
+                  onClick={() => {
+                    if (sortBy === 'Mac') {
+                      sortDirection === 'ASC'
+                        ? setSortDirection('DEC')
+                        : setSortDirection('ASC');
+                    } else {
+                      setSortBy('Mac');
+                      setSortDirection('ASC');
+                    }
+                  }}
+                >
+                  <div className="flex justify-between">
+                    MAC
+                    {sortBy === 'Mac' ? (
+                      sortDirection === 'ASC' ? (
+                        <FaCaretDown className="my-auto text-gray-600 dark:text-gray-100" />
                       ) : (
-                        <FaSort className="my-auto text-gray-600 dark:text-gray-100" />
-                      )}
-                    </div>
-                  </th>
-                  <th
-                    scope="col"
-                    className={`border-gray-200 dark:border-gray-700 hover:bg-gray-300 dark:hover:bg-gray-800 text-gray-800 dark:text-gray-300 px-5 border-b text-left text-sm uppercase font-medium cursor-pointer ${
-                      sortBy === 'Time' ? 'bg-gray-200 dark:bg-gray-700' : null
-                    }`}
-                    onClick={() => {
-                      if (sortBy === 'Time') {
-                        sortDirection === 'ASC'
-                          ? setSortDirection('DEC')
-                          : setSortDirection('ASC');
-                      } else {
-                        setSortBy('Time');
-                        setSortDirection('ASC');
-                      }
-                    }}
-                  >
-                    <div className="flex justify-between">
-                      Time
-                      {sortBy === 'Time' ? (
-                        sortDirection === 'ASC' ? (
-                          <FaCaretDown className="my-auto text-gray-600 dark:text-gray-100" />
-                        ) : (
-                          <FaCaretUp className="my-auto text-gray-600 dark:text-gray-100" />
-                        )
+                        <FaCaretUp className="my-auto text-gray-600 dark:text-gray-100" />
+                      )
+                    ) : (
+                      <FaSort className="my-auto text-gray-600 dark:text-gray-100" />
+                    )}
+                  </div>
+                </th>
+                <th
+                  scope="col"
+                  className={`border-gray-200 dark:border-gray-700 hover:bg-gray-300 dark:hover:bg-gray-800 text-gray-800 dark:text-gray-300 px-5 border-b text-left text-sm uppercase font-medium cursor-pointer ${
+                    sortBy === 'Time' ? 'bg-gray-200 dark:bg-gray-700' : null
+                  }`}
+                  onClick={() => {
+                    if (sortBy === 'Time') {
+                      sortDirection === 'ASC'
+                        ? setSortDirection('DEC')
+                        : setSortDirection('ASC');
+                    } else {
+                      setSortBy('Time');
+                      setSortDirection('ASC');
+                    }
+                  }}
+                >
+                  <div className="flex justify-between">
+                    Time
+                    {sortBy === 'Time' ? (
+                      sortDirection === 'ASC' ? (
+                        <FaCaretDown className="my-auto text-gray-600 dark:text-gray-100" />
                       ) : (
-                        <FaSort className="my-auto text-gray-600 dark:text-gray-100" />
-                      )}
-                    </div>
-                  </th>
-                  <th
-                    scope="col"
-                    className={`border-gray-200 dark:border-gray-700 hover:bg-gray-300 dark:hover:bg-gray-800 text-gray-800 dark:text-gray-300 px-5 border-b text-left text-sm uppercase font-medium cursor-pointer ${
-                      sortBy === 'Battery'
-                        ? 'bg-gray-200 dark:bg-gray-700'
-                        : null
-                    }`}
-                    onClick={() => {
-                      if (sortBy === 'Battery') {
-                        sortDirection === 'ASC'
-                          ? setSortDirection('DEC')
-                          : setSortDirection('ASC');
-                      } else {
-                        setSortBy('Battery');
-                        setSortDirection('ASC');
-                      }
-                    }}
-                  >
-                    <div className="flex justify-between">
-                      Battery
-                      {sortBy === 'Battery' ? (
-                        sortDirection === 'ASC' ? (
-                          <FaCaretDown className="my-auto text-gray-600 dark:text-gray-100" />
-                        ) : (
-                          <FaCaretUp className="my-auto text-gray-600 dark:text-gray-100" />
-                        )
+                        <FaCaretUp className="my-auto text-gray-600 dark:text-gray-100" />
+                      )
+                    ) : (
+                      <FaSort className="my-auto text-gray-600 dark:text-gray-100" />
+                    )}
+                  </div>
+                </th>
+                <th
+                  scope="col"
+                  className={`border-gray-200 dark:border-gray-700 hover:bg-gray-300 dark:hover:bg-gray-800 text-gray-800 dark:text-gray-300 px-5 border-b text-left text-sm uppercase font-medium cursor-pointer ${
+                    sortBy === 'Battery' ? 'bg-gray-200 dark:bg-gray-700' : null
+                  }`}
+                  onClick={() => {
+                    if (sortBy === 'Battery') {
+                      sortDirection === 'ASC'
+                        ? setSortDirection('DEC')
+                        : setSortDirection('ASC');
+                    } else {
+                      setSortBy('Battery');
+                      setSortDirection('ASC');
+                    }
+                  }}
+                >
+                  <div className="flex justify-between">
+                    Battery
+                    {sortBy === 'Battery' ? (
+                      sortDirection === 'ASC' ? (
+                        <FaCaretDown className="my-auto text-gray-600 dark:text-gray-100" />
                       ) : (
-                        <FaSort className="my-auto text-gray-600 dark:text-gray-100" />
-                      )}
-                    </div>
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                {sortedData.map((node, index) => (
-                  <TableEntry key={index} node={node} />
-                ))}
-              </tbody>
-            </table>
+                        <FaCaretUp className="my-auto text-gray-600 dark:text-gray-100" />
+                      )
+                    ) : (
+                      <FaSort className="my-auto text-gray-600 dark:text-gray-100" />
+                    )}
+                  </div>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {sortedData.map((node, index) => (
+                <TableEntry key={index} node={node} />
+              ))}
+            </tbody>
+          </table>
+        </div>
+      ) : (
+        <div className="bg-gray-100 dark:bg-gray-600 text-gray-600 flex shadow-inner h-80 overflow-auto">
+          <div className="flex m-auto">
+            <div className="text-2xl font-medium mr-2">Loading</div>
+            <FaSpinner className="animate-spin m-auto text-2xl" />
           </div>
-        ) : (
-          <div className="bg-gray-100 dark:bg-gray-600 text-gray-600 flex shadow-inner h-80 overflow-auto">
-            <div className="flex m-auto">
-              <div className="text-2xl font-medium mr-2">Loading</div>
-              <FaSpinner className="animate-spin m-auto text-2xl" />
-            </div>
-          </div>
-        )
-      ) : null}
+        </div>
+      )}
     </div>
   );
 };
