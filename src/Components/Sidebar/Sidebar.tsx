@@ -4,6 +4,7 @@ import logoBlack from '../../../public/Mesh_Logo_Black.svg';
 import logoWhite from '../../../public/Mesh_Logo_White.svg';
 import DarkmodeToggle from '../Generic/DarkmodeToggle';
 import Dropdown from '../Generic/Dropdown';
+import MQTT from './MQTT';
 import type { NodeDataProperties } from './Node';
 
 export interface SidebarProps {
@@ -18,8 +19,8 @@ export interface SidebarProps {
 
 const Sidebar = (props: SidebarProps) => {
   return (
-    <div className="absolute right-0 hidden lg:block my-4 ml-4 shadow-lg w-56 mr-4">
-      <div className="bg-white h-full rounded-md dark:bg-gray-700">
+    <div className="absolute right-0 hidden lg:block my-4 ml-4 shadow-md w-56 mr-4">
+      <div className="bg-white dark:bg-gray-700 h-full rounded-md">
         <div className="flex items-center justify-center pt-6">
           <img className="w-14" src={props.darkmode ? logoWhite : logoBlack} />
         </div>
@@ -37,6 +38,7 @@ const Sidebar = (props: SidebarProps) => {
               </div>
             </div>
           </div>
+          <MQTT />
 
           <div className="flex pb-2 justify-between mx-2">
             <div className="text-gray-600 dark:text-gray-100 mr-2 text-xl my-auto font-medium">

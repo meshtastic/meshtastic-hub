@@ -9,6 +9,7 @@
     "build-storybook": "build-storybook"
   },
   "dependencies": {
+    "@jdiamond/mqtt-browser": "^0.1.1",
     "mapbox-gl": "^2.2.0",
     "react": "^17.0.0",
     "react-dom": "^17.0.0",
@@ -38,6 +39,7 @@
     "babel-loader": "^8.2.2",
     "chai": "^4.2.0",
     "postcss": "^8.2.10",
+    "postcss-cli": "^8.3.1",
     "prettier": "^2.0.5",
     "snowpack": "^3.0.1",
     "storybook-addon-themes": "^6.1.0",
