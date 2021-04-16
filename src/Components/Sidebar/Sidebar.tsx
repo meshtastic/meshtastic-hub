@@ -1,4 +1,5 @@
 import React from 'react';
+import type { MapStyle } from '../../MapStyle';
 
 import logoBlack from '../../../public/Mesh_Logo_Black.svg';
 import logoWhite from '../../../public/Mesh_Logo_White.svg';
@@ -15,6 +16,8 @@ export interface SidebarProps {
   };
   darkmode: boolean;
   setDarkmode: Function;
+  selectedMapStyle: MapStyle;
+  setSelectedMapStyle: Function;
 }
 
 const Sidebar = (props: SidebarProps) => {
@@ -27,7 +30,12 @@ const Sidebar = (props: SidebarProps) => {
         <nav className="mt-6">
           <div>
             <span className="mx-2 text-sm dark:text-gray-200">Map Type</span>
-            <Dropdown />
+            <Dropdown 
+              selectedMapStyle={props.selectedMapStyle}
+              setSelectedMapStyle={(data: MapStyle) => {
+                props.setSelectedMapStyle(data);
+              }}
+            />
           </div>
 
           <div className="flex">
