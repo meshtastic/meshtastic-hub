@@ -23,7 +23,6 @@ const Badge = (props: BadgeProps) => {
       }`}
     >
       <span
-        aria-hidden="true"
         className={`absolute inset-0 opacity-50 rounded-full ${
           props.variant === 'Primary'
             ? 'bg-blue-200 dark:bg-blue-500'

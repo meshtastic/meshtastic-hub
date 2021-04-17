@@ -1,49 +1,37 @@
-import React, { useEffect, useState } from 'react';
+import React, { Dispatch, SetStateAction } from 'react';
 
+import { Switch } from '@headlessui/react';
 import { MoonIcon, SunIcon } from '@heroicons/react/outline';
 
 export interface DarkmodeToggleProps {
   darkmode: boolean;
-  toggle?: Function;
+  setDarkmode: Dispatch<SetStateAction<boolean>>;
 }
 
 const DarkmodeToggle = (props: DarkmodeToggleProps) => {
-  const [darkmode, setDarkmode] = useState(false);
-
-  useEffect(() => {
-    setDarkmode(props.darkmode);
-  }, []);
-
   return (
-    <div
-      onClick={() => {
-        setDarkmode(!darkmode);
-
-        if (props.toggle) {
-          props.toggle();
-        }
-      }}
-      className={`bg-gray-200 dark:bg-gray-600 text-gray-600 dark:text-gray-100 cursor-pointer shadow-md w-36 h-10 flex items-center rounded-full p-1 duration-300 ease-in-out my-auto`}
-    >
-      <div
-        className={`bg-white dark:bg-gray-700 hover:bg-gray-100 dark:hover:bg-gray-800 flex h-8 rounded-full shadow-md transform duration-300 ease-in-out ${
-          darkmode ? 'translate-x-14' : null
-        }`}
+    <div className="mx-2">
+      <Switch
+        checked={props.darkmode}
+        onChange={props.setDarkmode}
+        className="flex bg-gray-200 dark:bg-gray-600 text-gray-600 dark:text-gray-100 cursor-pointer shadow-md w-full h-10 items-center rounded-full p-1 duration-300 ease-in-out my-auto focus:outline-none"
       >
-        <div className="flex m-auto px-2">
-          {darkmode ? (
-            <>
-              <MoonIcon className="w-5 h-5 m-auto mr-1" />
-              Dark
-            </>
+        <span
+          className={`${props.darkmode ? 'translate-x-full' : 'translate-x-0'}
+            flex pointer-events-none h-[34px] w-24 rounded-full bg-white dark:bg-gray-700 hover:bg-gray-100 dark:hover:bg-gray-800 shadow-md transform transition ease-in-out duration-200`}
+        >
+          {props.darkmode ? (
+            <div className="flex m-auto">
+              <SunIcon className="w-5 h-5 mr-1 my-auto" /> Light
+            </div>
           ) : (
-            <>
-              <SunIcon className="w-5 h-5 m-auto mr-1" />
-              Light
-            </>
+            <div className="flex m-auto">
+              <MoonIcon className="w-5 h-5 mr-1 my-auto" />
+              Dark
+            </div>
           )}
-        </div>
-      </div>
+        </span>
+      </Switch>
     </div>
   );
 };

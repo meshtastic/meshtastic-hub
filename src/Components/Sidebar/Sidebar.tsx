@@ -1,60 +1,58 @@
 import React, { Dispatch, SetStateAction } from 'react';
 
+import type { position } from 'src/App';
+
 import logoBlack from '../../../public/Mesh_Logo_Black.svg';
 import logoWhite from '../../../public/Mesh_Logo_White.svg';
 import DarkmodeToggle from '../Generic/DarkmodeToggle';
 import Dropdown, { MapStyle } from '../Generic/Dropdown';
-import MQTT from './MQTT';
-import type { NodeDataProperties } from './Node';
+import Coordinates from './Coordinates';
+
+export interface NodeDataProperties {
+  id: string;
+  lastHeard?: number;
+  longName?: string;
+  position?: {
+    altitude?: number;
+    batteryLevel?: number;
+    latitudeI?: number;
+    longitudeI?: number;
+    time?: number;
+  };
+  user?: {
+    hwModel?: string; //enum
+    id?: string;
+    longName?: string;
+    macaddr?: string;
+    shortName?: string;
+  };
+}
 
 export interface SidebarProps {
   nodes: NodeDataProperties[];
-  currentPosition: {
-    lat: number;
-    lng: number;
-  };
+  position: position;
   darkmode: boolean;
-  setDarkmode: Function;
   mapStyle: MapStyle;
+  setDarkmode: Dispatch<SetStateAction<boolean>>;
   setMapStyle: Dispatch<SetStateAction<MapStyle>>;
 }
 
 const Sidebar = (props: SidebarProps) => {
   return (
-    <div className="absolute right-0 hidden lg:block my-4 ml-4 shadow-md w-56 mr-4">
-      <div className="bg-white dark:bg-gray-700 h-full rounded-md">
-        <div className="flex items-center justify-center pt-6">
-          <img className="w-14" src={props.darkmode ? logoWhite : logoBlack} />
+    <div className="absolute right-0 m-4 shadow-md w-56">
+      <div className="bg-white dark:bg-gray-700 rounded-md">
+        <div className="flex items-center justify-center py-6">
+          <img className="h-12" src={props.darkmode ? logoWhite : logoBlack} />
         </div>
-        <nav className="mt-6">
-          <div className="py-2">
-            <Dropdown
-              mapStyle={props.mapStyle}
-              setMapStyle={props.setMapStyle}
-            />
-          </div>
+        <nav className="space-y-2 pb-2">
+          <Dropdown mapStyle={props.mapStyle} setMapStyle={props.setMapStyle} />
 
-          <div className="flex">
-            <div className="flex w-full mx-2 mb-2 shadow-md border rounded-md">
-              <div className="mx-auto text-lg dark:text-gray-200">
-                Lat: <small>{props.currentPosition.lat}</small>, Lng:{' '}
-                <small>{props.currentPosition.lng}</small>
-              </div>
-            </div>
-          </div>
-          <MQTT />
+          <Coordinates position={props.position} />
 
-          <div className="flex pb-2 justify-between mx-2">
-            <div className="text-gray-600 dark:text-gray-100 mr-2 text-xl my-auto font-medium">
-              Theme:
-            </div>
-            <DarkmodeToggle
-              darkmode={props.darkmode}
-              toggle={() => {
-                props.setDarkmode(!props.darkmode);
-              }}
-            />
-          </div>
+          <DarkmodeToggle
+            darkmode={props.darkmode}
+            setDarkmode={props.setDarkmode}
+          />
         </nav>
       </div>
     </div>

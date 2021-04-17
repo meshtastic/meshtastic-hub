@@ -18,4 +18,8 @@ Default.args = {
   ...mockSidebarData,
   nodes: mockNodesData,
   mapStyle: MapStyles.Light,
+  position: {
+    lat: 0,
+    lng: 0,
+  },
 };

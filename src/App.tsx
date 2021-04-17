@@ -10,12 +10,14 @@ import Map from './Components/Map';
 import type { NodeDataProperties } from './Components/Sidebar/Node';
 import Sidebar from './Components/Sidebar/Sidebar';
 
+export interface position {
+  lat: number;
+  lng: number;
+}
+
 function App() {
   const [nodes, setNodes] = useState({} as GeoJSON.FeatureCollection);
-  const [currentPosition, setCurrentPosition] = useState<{
-    lat: number;
-    lng: number;
-  }>({
+  const [currentPosition, setCurrentPosition] = useState<position>({
     lat: 0,
     lng: 0,
   });
@@ -43,9 +45,7 @@ function App() {
         <Map
           nodes={nodes}
           darkmode={darkmode}
-          setPosition={(data) => {
-            setCurrentPosition(data);
-          }}
+          setPosition={setCurrentPosition}
           mapStyle={mapStyle}
         />
         <Sidebar
@@ -56,14 +56,15 @@ function App() {
                 })
               : []
           }
-          currentPosition={currentPosition}
+          position={currentPosition}
           darkmode={darkmode}
-          setDarkmode={(data: any) => {
-            setDarkmode(data);
-            setMapStyle(getDefaultMapStyle(data, mapStyle));
-          }}
-          mapStyle={mapStyle}
+          setDarkmode={setDarkmode}
+          // setDarkmode={(data: any) => {
+          //   setDarkmode(data);
+          //   setMapStyle(getDefaultMapStyle(data, mapStyle));
+          // }}
           setMapStyle={setMapStyle}
+          mapStyle={mapStyle}
         />
         <DataTable
           nodes={

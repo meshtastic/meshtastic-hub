@@ -121,7 +121,7 @@ const DataTable = (props: DataTableProps) => {
           <div className="text-gray-600 dark:text-gray-100 group-hover:text-gray-700 dark:group-hover:text-gray-200  flex justify-between">
             <div className="flex">
               Nodes:
-              <div className="bg-gray-400 dark:bg-gray-900 ml-2 px-2 rounded-full">
+              <div className="bg-gray-300 dark:bg-gray-800 group-hover:bg-gray-400 dark:group-hover:bg-gray-900 ml-2 px-2 rounded-full">
                 {props.nodes.length}
               </div>
             </div>
@@ -158,12 +158,12 @@ const DataTable = (props: DataTableProps) => {
                     ID
                     {sortBy === 'Id' ? (
                       sortDirection === 'ASC' ? (
-                        <SortAscendingIcon className="w-5 h-5" />
+                        <SortAscendingIcon className="w-4 h-4 my-auto" />
                       ) : (
-                        <SortDescendingIcon className="w-5 h-5" />
+                        <SortDescendingIcon className="w-4 h-4 my-auto" />
                       )
                     ) : (
-                      <SortDescendingIcon className="w-5 h-5" />
+                      <SortDescendingIcon className="w-4 h-4 my-auto" />
                     )}
                   </div>
                 </th>
@@ -187,12 +187,12 @@ const DataTable = (props: DataTableProps) => {
                     MAC
                     {sortBy === 'Mac' ? (
                       sortDirection === 'ASC' ? (
-                        <SortAscendingIcon className="w-5 h-5" />
+                        <SortAscendingIcon className="w-4 h-4 my-auto" />
                       ) : (
-                        <SortDescendingIcon className="w-5 h-5" />
+                        <SortDescendingIcon className="w-4 h-4 my-auto" />
                       )
                     ) : (
-                      <SortDescendingIcon className="w-5 h-5" />
+                      <SortDescendingIcon className="w-4 h-4 my-auto" />
                     )}
                   </div>
                 </th>
@@ -216,12 +216,12 @@ const DataTable = (props: DataTableProps) => {
                     Time
                     {sortBy === 'Time' ? (
                       sortDirection === 'ASC' ? (
-                        <SortAscendingIcon className="w-5 h-5" />
+                        <SortAscendingIcon className="w-4 h-4 my-auto" />
                       ) : (
-                        <SortDescendingIcon className="w-5 h-5" />
+                        <SortDescendingIcon className="w-4 h-4 my-auto" />
                       )
                     ) : (
-                      <SortDescendingIcon className="w-5 h-5" />
+                      <SortDescendingIcon className="w-4 h-4 my-auto" />
                     )}
                   </div>
                 </th>
@@ -245,12 +245,12 @@ const DataTable = (props: DataTableProps) => {
                     Battery
                     {sortBy === 'Battery' ? (
                       sortDirection === 'ASC' ? (
-                        <SortAscendingIcon className="w-5 h-5" />
+                        <SortAscendingIcon className="w-4 h-4 my-auto" />
                       ) : (
-                        <SortDescendingIcon className="w-5 h-5" />
+                        <SortDescendingIcon className="w-4 h-4 my-auto" />
                       )
                     ) : (
-                      <SortDescendingIcon className="w-5 h-5" />
+                      <SortDescendingIcon className="w-4 h-4 my-auto" />
                     )}
                   </div>
                 </th>

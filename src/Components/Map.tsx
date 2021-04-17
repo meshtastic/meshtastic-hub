@@ -3,19 +3,15 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 import React, { useEffect, useRef, useState } from 'react';
 
 import mapboxgl from 'mapbox-gl';
+import type { position } from 'src/App';
 
 import { getDefaultMapStyle, MapStyle } from './Generic/Dropdown';
 
 export interface MapProps {
   nodes: GeoJSON.FeatureCollection;
   darkmode: boolean;
-  setPosition: React.Dispatch<
-    React.SetStateAction<{
-      lat: number;
-      lng: number;
-    }>
-  >;
   mapStyle: MapStyle;
+  setPosition: React.Dispatch<React.SetStateAction<position>>;
 }
 const Map = (props: MapProps) => {
   mapboxgl.accessToken =
@@ -108,8 +104,8 @@ const Map = (props: MapProps) => {
       });
 
       map.on('move', () => {
-        const currentLat = parseFloat(map.getCenter().lat.toPrecision(4));
-        const currentLng = parseFloat(map.getCenter().lng.toPrecision(4));
+        const currentLat = map.getCenter().lat;
+        const currentLng = map.getCenter().lng;
         setLng(currentLng);
         setLat(currentLat);
         setZoom(parseFloat(map.getZoom().toPrecision(4)));
