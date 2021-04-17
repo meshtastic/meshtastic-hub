@@ -5,7 +5,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import mapboxgl from 'mapbox-gl';
 import type { position } from 'src/App';
 
-import { getDefaultMapStyle, MapStyle } from './Generic/Dropdown';
+import { getDefaultMapStyle, MapStyle } from './Sidebar/MapStyleSelect';
 
 export interface MapProps {
   nodes: GeoJSON.FeatureCollection;

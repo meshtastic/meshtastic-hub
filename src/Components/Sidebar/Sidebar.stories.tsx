@@ -3,7 +3,7 @@ import React from 'react';
 import type { Meta, Story } from '@storybook/react';
 
 import { mockNodesData, mockSidebarData } from '../../../src/mockData';
-import { MapStyles } from '../Generic/Dropdown';
+import { MapStyles } from './MapStyleSelect';
 import Sidebar, { SidebarProps } from './Sidebar';
 
 export default {

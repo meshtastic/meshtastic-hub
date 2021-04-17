@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { ChipIcon } from '@heroicons/react/outline';
 
 import Badge from '../Generic/Badge';
-import type { NodeDataProperties } from '../Sidebar/Node';
+import type { NodeDataProperties } from '../Sidebar/Sidebar';
 
 export interface TableEntryProps {
   node: NodeDataProperties;
@@ -23,7 +23,7 @@ const TableEntry = (props: TableEntryProps) => {
   return (
     <>
       <tr
-        className={`hover:bg-gray-300 dark:hover:bg-gray-800 border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-800 cursor-pointer border-b ${
+        className={`bg-gray-100 dark:bg-gray-600 hover:bg-gray-300 dark:hover:bg-gray-800 border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-800 cursor-pointer border-b ${
           expanded ? 'bg-gray-200 dark:bg-gray-700' : null
         }`}
         onClick={() => {

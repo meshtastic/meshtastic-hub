@@ -7,7 +7,7 @@ import {
   SortDescendingIcon,
 } from '@heroicons/react/outline';
 
-import type { NodeDataProperties } from '../Sidebar/Node';
+import type { NodeDataProperties } from '../Sidebar/Sidebar';
 import TableEntry from './TableEntry';
 
 export interface DataTableProps {

@@ -4,9 +4,9 @@ import type { position } from 'src/App';
 
 import logoBlack from '../../../public/Mesh_Logo_Black.svg';
 import logoWhite from '../../../public/Mesh_Logo_White.svg';
-import DarkmodeToggle from '../Generic/DarkmodeToggle';
-import Dropdown, { MapStyle } from '../Generic/Dropdown';
 import Coordinates from './Coordinates';
+import DarkmodeToggle from './DarkmodeToggle';
+import MapStyleSelect, { MapStyle } from './MapStyleSelect';
 
 export interface NodeDataProperties {
   id: string;
@@ -45,7 +45,10 @@ const Sidebar = (props: SidebarProps) => {
           <img className="h-12" src={props.darkmode ? logoWhite : logoBlack} />
         </div>
         <nav className="space-y-2 pb-2">
-          <Dropdown mapStyle={props.mapStyle} setMapStyle={props.setMapStyle} />
+          <MapStyleSelect
+            mapStyle={props.mapStyle}
+            setMapStyle={props.setMapStyle}
+          />
 
           <Coordinates position={props.position} />
 

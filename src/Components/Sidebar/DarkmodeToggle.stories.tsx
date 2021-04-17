@@ -5,7 +5,7 @@ import type { Meta, Story } from '@storybook/react';
 import DarkmodeToggle, { DarkmodeToggleProps } from './DarkmodeToggle';
 
 export default {
-  title: 'Meshtastic HUB/Generic/DarkmodeToggle',
+  title: 'Meshtastic HUB/Sidebar/DarkmodeToggle',
   component: DarkmodeToggle,
 } as Meta;
 

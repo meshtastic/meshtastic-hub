@@ -8,7 +8,7 @@ export interface MapStyle {
   url: string;
 }
 
-export interface DropdownProps {
+export interface MapStyleSelectProps {
   mapStyle: MapStyle;
   setMapStyle: Dispatch<SetStateAction<MapStyle>>;
 }
@@ -36,7 +36,7 @@ export function getDefaultMapStyle(
     : MapStyles.Light;
 }
 
-const Dropdown = (props: DropdownProps) => {
+const MapStyleSelect = (props: MapStyleSelectProps) => {
   return (
     <Listbox value={props.mapStyle} onChange={props.setMapStyle}>
       {({ open }) => (
@@ -105,4 +105,4 @@ const Dropdown = (props: DropdownProps) => {
   );
 };
 
-export default Dropdown;
+export default MapStyleSelect;

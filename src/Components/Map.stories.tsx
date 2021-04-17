@@ -2,8 +2,8 @@ import React from 'react';
 
 import type { Meta, Story } from '@storybook/react';
 
-import { MapStyles } from './Generic/Dropdown';
 import Map, { MapProps } from './Map';
+import { MapStyles } from './Sidebar/MapStyleSelect';
 
 export default {
   title: 'Meshtastic HUB/Map',

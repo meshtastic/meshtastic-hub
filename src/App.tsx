@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from 'react';
 
 import DataTable from './Components/DataTable/DataTable';
+import Map from './Components/Map';
 import {
   getDefaultMapStyle,
   MapStyle,
   MapStyles,
-} from './Components/Generic/Dropdown';
-import Map from './Components/Map';
-import type { NodeDataProperties } from './Components/Sidebar/Node';
-import Sidebar from './Components/Sidebar/Sidebar';
+} from './Components/Sidebar/MapStyleSelect';
+import Sidebar, { NodeDataProperties } from './Components/Sidebar/Sidebar';
 
 export interface position {
   lat: number;
