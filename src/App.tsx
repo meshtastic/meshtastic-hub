@@ -7,33 +7,28 @@ import {
   MapStyle,
   MapStyles,
 } from './Components/Sidebar/MapStyleSelect';
+import {
+  getNodes, pollGetNodes
+} from './Service/hubMeshtastic';
 import Sidebar, { NodeDataProperties } from './Components/Sidebar/Sidebar';
+import { currentBrowserLocation } from './Service/geoLocation';
+import geoDefaults from './Service/geoLocation/defaults';
 
 export interface position {
   lat: number;
   lng: number;
 }
 
-function App() {
+function App () {
   const [nodes, setNodes] = useState({} as GeoJSON.FeatureCollection);
-  const [currentPosition, setCurrentPosition] = useState<position>({
-    lat: 0,
-    lng: 0,
-  });
+  const [currentPosition, setCurrentPosition] = useState<position>(geoDefaults.US);
   const [darkmode, setDarkmode] = useState<boolean>(false);
   const [mapStyle, setMapStyle] = useState<MapStyle>(
     getDefaultMapStyle(darkmode, MapStyles.Light),
   );
 
-  useEffect(() => {
-    setInterval(async () => {
-      fetch('https://hub.meshtastic.org/v1/geoJSON/nodes')
-        .then((response) => response.json())
-        .then((data) => {
-          setNodes(data);
-        });
-    }, 3000);
-  }, []);
+  useEffect(() => { pollGetNodes((x) => { setNodes(x); console.log(x)}).subscribe() }, [])
+
   return (
     <div
       className={`w-screen h-screen select-none max-h-screen flex flex-col ${

@@ -14,7 +14,8 @@
     "@jdiamond/mqtt-browser": "^0.1.1",
     "mapbox-gl": "^2.2.0",
     "react": "^17.0.0",
-    "react-dom": "^17.0.0"
+    "react-dom": "^17.0.0",
+    "rxjs": "^6.6.7"
   },
   "devDependencies": {
     "@babel/core": "^7.13.15",
