@@ -3,7 +3,8 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 import React, { useEffect, useRef, useState } from 'react';
 
 import mapboxgl from 'mapbox-gl';
-import { getDefaultMapStyleForMode, MapStyle } from '../MapStyle';
+
+import { getDefaultMapStyle, MapStyle } from './Generic/Dropdown';
 
 export interface MapProps {
   nodes: GeoJSON.FeatureCollection;
@@ -14,7 +15,7 @@ export interface MapProps {
       lng: number;
     }>
   >;
-  selectedMapStyle: MapStyle;
+  mapStyle: MapStyle;
 }
 const Map = (props: MapProps) => {
   mapboxgl.accessToken =
@@ -27,10 +28,8 @@ const Map = (props: MapProps) => {
   const [mapLoaded, setMapLoaded] = useState(false);
 
   useEffect(() => {
-    map?.setStyle(
-      props.selectedMapStyle.url,
-    );
-  }, [props.selectedMapStyle]);
+    map?.setStyle(props.mapStyle.url);
+  }, [props.mapStyle]);
 
   useEffect(() => {
     if (mapLoaded && map) {
@@ -79,7 +78,7 @@ const Map = (props: MapProps) => {
       }
       const map = new mapboxgl.Map({
         container: mapDiv.current || '',
-        style: getDefaultMapStyleForMode(props.darkmode).url,
+        style: getDefaultMapStyle(props.darkmode, props.mapStyle).url,
         center: [lng, lat],
         zoom: zoom,
       });

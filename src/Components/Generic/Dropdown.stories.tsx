@@ -2,8 +2,8 @@ import React from 'react';
 
 import type { Meta, Story } from '@storybook/react';
 
+import { MapStyles } from '../Generic/Dropdown';
 import Dropdown, { DropdownProps } from './Dropdown';
-import { MapStyles } from '../../MapStyle';
 
 export default {
   title: 'Meshtastic HUB/Generic/Dropdown',
@@ -14,5 +14,5 @@ const Template: Story<DropdownProps> = (args) => <Dropdown {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {
-  selectedMapStyle: MapStyles.Light
+  mapStyle: MapStyles.Light,
 };

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import { FaMicrochip } from 'react-icons/fa';
+import { ChipIcon } from '@heroicons/react/outline';
 
 import Badge from '../Generic/Badge';
 import type { NodeDataProperties } from '../Sidebar/Node';
@@ -33,7 +33,7 @@ const TableEntry = (props: TableEntryProps) => {
         <td className="text-gray-900 dark:text-gray-200 sm:px-1 md:px-5 py-1 text-sm">
           <div className="flex items-center">
             <div className="flex-shrink-0">
-              <FaMicrochip className="mx-auto" />
+              <ChipIcon className="w-5 h-5" />
             </div>
             <div className="ml-3">
               {props.node.user?.id ? (
@@ -96,7 +96,7 @@ const TableEntry = (props: TableEntryProps) => {
           >
             <div className="bg-gray-200 dark:bg-gray-700 text-gray-900 dark:text-gray-200 flex sm:px-1 md:px-5 shadow-inner w-full space-x-4 py-4">
               <div className="flex">
-                <FaMicrochip className="text-8xl m-auto" />
+                <ChipIcon className="w-5 h-5" />
               </div>
               <div className="text-xl font-medium">
                 {props.node.user?.longName}

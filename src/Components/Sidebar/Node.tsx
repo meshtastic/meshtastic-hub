@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import { FaCaretDown, FaCaretUp } from 'react-icons/fa';
+import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/react/outline';
 
 export interface NodeProps {
   node: NodeDataProperties;
@@ -43,8 +43,13 @@ const Node = (props: NodeProps) => {
           <p className="truncate">{props.node.longName}</p>
         </div>
         <div className="my-auto">
-          {/* hover:bounce */}
-          {dropdownOpen ? <FaCaretUp /> : <FaCaretDown />}
+          {/* hover:bounce
+          & @todo not working */}
+          {dropdownOpen ? (
+            <ChevronUpIcon className="w-5 h-5" />
+          ) : (
+            <ChevronDownIcon className="w-5 h-5" />
+          )}
         </div>
       </div>
 

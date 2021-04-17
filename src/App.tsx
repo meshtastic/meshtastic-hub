@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from 'react';
 
 import DataTable from './Components/DataTable/DataTable';
+import {
+  getDefaultMapStyle,
+  MapStyle,
+  MapStyles,
+} from './Components/Generic/Dropdown';
 import Map from './Components/Map';
 import type { NodeDataProperties } from './Components/Sidebar/Node';
 import Sidebar from './Components/Sidebar/Sidebar';
-import { getDefaultMapStyleForMode, MapStyle } from './MapStyle';
 
 function App() {
   const [nodes, setNodes] = useState({} as GeoJSON.FeatureCollection);
@@ -16,7 +20,9 @@ function App() {
     lng: 0,
   });
   const [darkmode, setDarkmode] = useState<boolean>(false);
-  const [selectedMapStyle, setSelectedMapStyle] = useState<MapStyle>(getDefaultMapStyleForMode(darkmode));
+  const [mapStyle, setMapStyle] = useState<MapStyle>(
+    getDefaultMapStyle(darkmode, MapStyles.Light),
+  );
 
   useEffect(() => {
     setInterval(async () => {
@@ -40,7 +46,7 @@ function App() {
           setPosition={(data) => {
             setCurrentPosition(data);
           }}
-          selectedMapStyle={selectedMapStyle}
+          mapStyle={mapStyle}
         />
         <Sidebar
           nodes={
@@ -54,12 +60,10 @@ function App() {
           darkmode={darkmode}
           setDarkmode={(data: any) => {
             setDarkmode(data);
-            setSelectedMapStyle(getDefaultMapStyleForMode(data))
+            setMapStyle(getDefaultMapStyle(data, mapStyle));
           }}
-          selectedMapStyle={selectedMapStyle}
-          setSelectedMapStyle={(data: any) => {
-            setSelectedMapStyle(data);
-          }}
+          mapStyle={mapStyle}
+          setMapStyle={setMapStyle}
         />
         <DataTable
           nodes={

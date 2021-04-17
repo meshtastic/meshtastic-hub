@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from 'react';
 
-import { FaCaretDown, FaCaretUp, FaSort, FaSpinner } from 'react-icons/fa';
+import {
+  ChevronDownIcon,
+  ChevronUpIcon,
+  SortAscendingIcon,
+  SortDescendingIcon,
+} from '@heroicons/react/outline';
 
 import type { NodeDataProperties } from '../Sidebar/Node';
 import TableEntry from './TableEntry';
@@ -121,9 +126,9 @@ const DataTable = (props: DataTableProps) => {
               </div>
             </div>
             {dataTableOpen ? (
-              <FaCaretDown className="my-auto" />
+              <ChevronDownIcon className="w-5 h-5 my-auto" />
             ) : (
-              <FaCaretUp className="my-auto" />
+              <ChevronUpIcon className="w-5 h-5 my-auto" />
             )}
           </div>
         </div>
@@ -149,16 +154,16 @@ const DataTable = (props: DataTableProps) => {
                     }
                   }}
                 >
-                  <div className="flex justify-between">
+                  <div className="flex justify-between text-gray-600 dark:text-gray-100">
                     ID
                     {sortBy === 'Id' ? (
                       sortDirection === 'ASC' ? (
-                        <FaCaretDown className="my-auto text-gray-600 dark:text-gray-100" />
+                        <SortAscendingIcon className="w-5 h-5" />
                       ) : (
-                        <FaCaretUp className="my-auto text-gray-600 dark:text-gray-100" />
+                        <SortDescendingIcon className="w-5 h-5" />
                       )
                     ) : (
-                      <FaSort className="my-auto text-gray-600 dark:text-gray-100" />
+                      <SortDescendingIcon className="w-5 h-5" />
                     )}
                   </div>
                 </th>
@@ -178,16 +183,16 @@ const DataTable = (props: DataTableProps) => {
                     }
                   }}
                 >
-                  <div className="flex justify-between">
+                  <div className="flex justify-between text-gray-600 dark:text-gray-100">
                     MAC
                     {sortBy === 'Mac' ? (
                       sortDirection === 'ASC' ? (
-                        <FaCaretDown className="my-auto text-gray-600 dark:text-gray-100" />
+                        <SortAscendingIcon className="w-5 h-5" />
                       ) : (
-                        <FaCaretUp className="my-auto text-gray-600 dark:text-gray-100" />
+                        <SortDescendingIcon className="w-5 h-5" />
                       )
                     ) : (
-                      <FaSort className="my-auto text-gray-600 dark:text-gray-100" />
+                      <SortDescendingIcon className="w-5 h-5" />
                     )}
                   </div>
                 </th>
@@ -207,16 +212,16 @@ const DataTable = (props: DataTableProps) => {
                     }
                   }}
                 >
-                  <div className="flex justify-between">
+                  <div className="flex justify-between  text-gray-600 dark:text-gray-100">
                     Time
                     {sortBy === 'Time' ? (
                       sortDirection === 'ASC' ? (
-                        <FaCaretDown className="my-auto text-gray-600 dark:text-gray-100" />
+                        <SortAscendingIcon className="w-5 h-5" />
                       ) : (
-                        <FaCaretUp className="my-auto text-gray-600 dark:text-gray-100" />
+                        <SortDescendingIcon className="w-5 h-5" />
                       )
                     ) : (
-                      <FaSort className="my-auto text-gray-600 dark:text-gray-100" />
+                      <SortDescendingIcon className="w-5 h-5" />
                     )}
                   </div>
                 </th>
@@ -236,16 +241,16 @@ const DataTable = (props: DataTableProps) => {
                     }
                   }}
                 >
-                  <div className="flex justify-between">
+                  <div className="flex justify-between text-gray-600 dark:text-gray-100">
                     Battery
                     {sortBy === 'Battery' ? (
                       sortDirection === 'ASC' ? (
-                        <FaCaretDown className="my-auto text-gray-600 dark:text-gray-100" />
+                        <SortAscendingIcon className="w-5 h-5" />
                       ) : (
-                        <FaCaretUp className="my-auto text-gray-600 dark:text-gray-100" />
+                        <SortDescendingIcon className="w-5 h-5" />
                       )
                     ) : (
-                      <FaSort className="my-auto text-gray-600 dark:text-gray-100" />
+                      <SortDescendingIcon className="w-5 h-5" />
                     )}
                   </div>
                 </th>
@@ -262,7 +267,8 @@ const DataTable = (props: DataTableProps) => {
         <div className="bg-gray-100 dark:bg-gray-600 text-gray-600 flex shadow-inner h-80 overflow-auto">
           <div className="flex m-auto">
             <div className="text-2xl font-medium mr-2">Loading</div>
-            <FaSpinner className="animate-spin m-auto text-2xl" />
+            {/* <FaSpinner className="animate-spin m-auto text-2xl" /> */}
+            {/* @todo replace with placeholder loading animation */}
           </div>
         </div>
       )}

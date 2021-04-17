@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-import { FaMoon, FaSun } from 'react-icons/fa';
+import { MoonIcon, SunIcon } from '@heroicons/react/outline';
 
 export interface DarkmodeToggleProps {
   darkmode: boolean;
@@ -33,12 +33,12 @@ const DarkmodeToggle = (props: DarkmodeToggleProps) => {
         <div className="flex m-auto px-2">
           {darkmode ? (
             <>
-              <FaMoon className="m-auto mr-1" />
+              <MoonIcon className="w-5 h-5 m-auto mr-1" />
               Dark
             </>
           ) : (
             <>
-              <FaSun className="m-auto mr-1" />
+              <SunIcon className="w-5 h-5 m-auto mr-1" />
               Light
             </>
           )}

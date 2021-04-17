@@ -1,10 +1,9 @@
-import React from 'react';
-import type { MapStyle } from '../../MapStyle';
+import React, { Dispatch, SetStateAction } from 'react';
 
 import logoBlack from '../../../public/Mesh_Logo_Black.svg';
 import logoWhite from '../../../public/Mesh_Logo_White.svg';
 import DarkmodeToggle from '../Generic/DarkmodeToggle';
-import Dropdown from '../Generic/Dropdown';
+import Dropdown, { MapStyle } from '../Generic/Dropdown';
 import MQTT from './MQTT';
 import type { NodeDataProperties } from './Node';
 
@@ -16,8 +15,8 @@ export interface SidebarProps {
   };
   darkmode: boolean;
   setDarkmode: Function;
-  selectedMapStyle: MapStyle;
-  setSelectedMapStyle: Function;
+  mapStyle: MapStyle;
+  setMapStyle: Dispatch<SetStateAction<MapStyle>>;
 }
 
 const Sidebar = (props: SidebarProps) => {
@@ -28,13 +27,10 @@ const Sidebar = (props: SidebarProps) => {
           <img className="w-14" src={props.darkmode ? logoWhite : logoBlack} />
         </div>
         <nav className="mt-6">
-          <div>
-            <span className="mx-2 text-sm dark:text-gray-200">Map Type</span>
-            <Dropdown 
-              selectedMapStyle={props.selectedMapStyle}
-              setSelectedMapStyle={(data: MapStyle) => {
-                props.setSelectedMapStyle(data);
-              }}
+          <div className="py-2">
+            <Dropdown
+              mapStyle={props.mapStyle}
+              setMapStyle={props.setMapStyle}
             />
           </div>
 
