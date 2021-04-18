@@ -96,7 +96,7 @@ const TableEntry = (props: TableEntryProps) => {
           >
             <div className="bg-gray-200 dark:bg-gray-700 text-gray-900 dark:text-gray-200 flex sm:px-1 md:px-5 shadow-inner w-full space-x-4 py-4">
               <div className="flex">
-                <ChipIcon className="w-5 h-5" />
+                <ChipIcon className="w-5 h-5 my-auto" />
               </div>
               <div className="text-xl font-medium">
                 {props.node.user?.longName}
