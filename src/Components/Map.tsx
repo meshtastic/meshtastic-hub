@@ -1,11 +1,12 @@
 import 'mapbox-gl/dist/mapbox-gl.css';
 
 import React, { useEffect, useRef, useState } from 'react';
-
+import { renderToString } from 'react-dom/server'
 import mapboxgl from 'mapbox-gl';
 import type { position } from 'src/App';
 
 import { getDefaultMapStyle, MapStyle } from './Sidebar/MapStyleSelect';
+
 
 export interface MapProps {
   nodes: GeoJSON.FeatureCollection;
@@ -56,6 +57,62 @@ const Map = (props: MapProps) => {
             'text-offset': [0, 1.25],
             'text-anchor': 'top',
           },
+        });
+
+        map.on('click', 'points', (e) => {
+          if (map && e.features && e.features.length > 0 && e.features[0].properties) {
+            const properties = e.features[0].properties;
+            const position = JSON.parse(properties.position || '{}');
+
+            new mapboxgl.Popup()
+              .setLngLat(e.lngLat)
+              .setHTML(
+                renderToString(
+                  <div>
+                    <div className="text-xl font-medium">
+                      {properties?.longName}
+                    </div>
+                    <ul>
+                      <li>
+                        ID: {properties?.id}
+                      </li>
+                      <li>
+                        Lat: {e.lngLat.lat}
+                      </li>
+                      <li>
+                        Long: {e.lngLat.lng}
+                      </li>
+                      <li>
+                        Time:&nbsp;
+                        {position?.time ? (
+                          <span className="whitespace-no-wrap">
+                            {new Date(position.time * 1000).toLocaleTimeString(
+                              [],
+                              { hour: '2-digit', minute: '2-digit' },
+                            )}
+                          </span>
+                        ) : (
+                          <span>Unknown</span>
+                        )}
+                      </li>
+                    </ul>
+                  </div>
+                )
+              )
+              .addTo(map);
+          }
+        });
+
+        map.on('mouseenter', 'points', () => {
+          if (map) {
+            map.getCanvas().style.cursor = 'pointer';
+          }
+        });
+           
+        map.on('mouseleave', 'points', () => {
+          if (map) {
+            map.getCanvas().style.cursor = '';
+          }
         });
       } else {
         if (source.type === 'geojson') {
