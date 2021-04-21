@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import { useSortBy, useTable } from 'react-table';
+import { Column, useSortBy, useTable } from 'react-table';
 
 import { Disclosure } from '@headlessui/react';
 import {
@@ -30,7 +30,7 @@ const DataTable = (props: DataTableProps) => {
 
     return decodedMac.slice(1);
   };
-  const columns = React.useMemo(
+  const columns = React.useMemo<Column<typeof data[0]>[]>(
     () => [
       {
         Header: 'ID',
