@@ -39,7 +39,7 @@ export interface SidebarProps {
 
 const Sidebar = (props: SidebarProps) => {
   return (
-    <div className="absolute right-0 m-4 shadow-md w-56">
+    <div className="absolute right-0 m-4 w-56">
       <div className="bg-white dark:bg-gray-700 rounded-md">
         <div className="flex items-center justify-center py-6">
           <img className="h-12" src={props.darkmode ? logoWhite : logoBlack} />

@@ -42,7 +42,7 @@ const MapStyleSelect = (props: MapStyleSelectProps) => {
       <Listbox value={props.mapStyle} onChange={props.setMapStyle}>
         <Listbox.Button className="flex relative w-full h-8 text-left bg-white dark:bg-gray-700 border rounded-md shadow-md cursor-default focus:outline-none">
           <MapIcon className="h-5 w-5 mx-2 my-auto" />
-          <span className="block truncate ">{props.mapStyle.title}</span>
+          <span className="block truncate my-auto">{props.mapStyle.title}</span>
           <span className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
             <SelectorIcon className="w-5 h-5" />
           </span>
@@ -52,10 +52,8 @@ const MapStyleSelect = (props: MapStyleSelectProps) => {
             <Listbox.Option key={index} value={mapStyle} as={React.Fragment}>
               {({ selected, active }) => (
                 <div
-                  className={`${
-                    active
-                      ? 'text-gray-800 dark:text-gray-200 bg-gray-100 dark:bg-gray-600'
-                      : 'text-gray-800 dark:text-gray-200'
+                  className={`text-gray-800 dark:text-gray-200 ${
+                    active ? ' bg-gray-100 dark:bg-gray-600' : null
                   }
                           cursor-pointer select-none relative py-2 pl-10 pr-4`}
                 >
