@@ -1,11 +1,11 @@
-import React, { Dispatch, SetStateAction } from 'react';
+import React from 'react';
 
 import { Switch } from '@headlessui/react';
 import { MoonIcon, SunIcon } from '@heroicons/react/outline';
 
 export interface DarkmodeToggleProps {
   darkmode: boolean;
-  setDarkmode: Dispatch<SetStateAction<boolean>>;
+  setDarkmode: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const DarkmodeToggle = (props: DarkmodeToggleProps) => {

@@ -1,4 +1,4 @@
-import React, { MouseEventHandler } from 'react';
+import React from 'react';
 
 import {
   TableInstance,
@@ -130,4 +130,4 @@ declare module 'react-table' {
 
 export type TableMouseEventHandler = (
   instance: TableInstance<T>,
-) => MouseEventHandler;
+) => React.MouseEventHandler;

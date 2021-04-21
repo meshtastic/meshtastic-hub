@@ -1,4 +1,4 @@
-import React, { Dispatch, Fragment, SetStateAction } from 'react';
+import React from 'react';
 
 import { Listbox } from '@headlessui/react';
 import { CheckIcon, MapIcon, SelectorIcon } from '@heroicons/react/outline';
@@ -10,7 +10,7 @@ export interface MapStyle {
 
 export interface MapStyleSelectProps {
   mapStyle: MapStyle;
-  setMapStyle: Dispatch<SetStateAction<MapStyle>>;
+  setMapStyle: React.Dispatch<React.SetStateAction<MapStyle>>;
 }
 
 export const MapStyles = {
@@ -40,8 +40,8 @@ const MapStyleSelect = (props: MapStyleSelectProps) => {
   return (
     <div className="relative text-gray-600 dark:text-gray-100">
       <Listbox value={props.mapStyle} onChange={props.setMapStyle}>
-        <Listbox.Button className="flex relative w-full py-1 px-2 text-left bg-white dark:bg-gray-700 border rounded-md shadow-md cursor-default focus:outline-none">
-          <MapIcon className="h-5 w-5 mr-2 my-auto" />
+        <Listbox.Button className="flex relative w-full h-8 text-left bg-white dark:bg-gray-700 border rounded-md shadow-md cursor-default focus:outline-none">
+          <MapIcon className="h-5 w-5 mx-2 my-auto" />
           <span className="block truncate ">{props.mapStyle.title}</span>
           <span className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
             <SelectorIcon className="w-5 h-5" />
@@ -49,7 +49,7 @@ const MapStyleSelect = (props: MapStyleSelectProps) => {
         </Listbox.Button>
         <Listbox.Options className="absolute w-full py-1 mt-1 overflow-auto text-base bg-white dark:bg-gray-700 rounded-md border shadow-md max-h-60 focus:outline-none z-40">
           {Object.entries(MapStyles).map(([name, mapStyle], index) => (
-            <Listbox.Option key={index} value={mapStyle} as={Fragment}>
+            <Listbox.Option key={index} value={mapStyle} as={React.Fragment}>
               {({ selected, active }) => (
                 <div
                   className={`${

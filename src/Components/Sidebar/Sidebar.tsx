@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction } from 'react';
+import React from 'react';
 
 import type { position } from 'src/App';
 
@@ -33,8 +33,8 @@ export interface SidebarProps {
   position: position;
   darkmode: boolean;
   mapStyle: MapStyle;
-  setDarkmode: Dispatch<SetStateAction<boolean>>;
-  setMapStyle: Dispatch<SetStateAction<MapStyle>>;
+  setDarkmode: React.Dispatch<React.SetStateAction<boolean>>;
+  setMapStyle: React.Dispatch<React.SetStateAction<MapStyle>>;
 }
 
 const Sidebar = (props: SidebarProps) => {

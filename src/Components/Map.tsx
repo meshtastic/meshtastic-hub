@@ -1,12 +1,12 @@
 import 'mapbox-gl/dist/mapbox-gl.css';
 
-import React, { useEffect, useRef, useState } from 'react';
-import { renderToString } from 'react-dom/server'
+import React from 'react';
+
 import mapboxgl from 'mapbox-gl';
+import { renderToString } from 'react-dom/server';
 import type { position } from 'src/App';
 
 import { getDefaultMapStyle, MapStyle } from './Sidebar/MapStyleSelect';
-
 
 export interface MapProps {
   nodes: GeoJSON.FeatureCollection;
@@ -17,18 +17,18 @@ export interface MapProps {
 const Map = (props: MapProps) => {
   mapboxgl.accessToken =
     'pk.eyJ1Ijoic2FjaGF3IiwiYSI6ImNrNW9meXozZjBsdW0zbHBjM2FnNnV6cmsifQ.3E4n8eFGD9ZOFo-XDVeZnQ';
-  const mapDiv = useRef<HTMLDivElement>(null);
-  let [map, setMap] = useState(null as mapboxgl.Map | null);
-  const [lng, setLng] = useState(-70.9);
-  const [lat, setLat] = useState(42.35);
-  const [zoom, setZoom] = useState(9);
-  const [mapLoaded, setMapLoaded] = useState(false);
+  const mapDiv = React.useRef<HTMLDivElement>(null);
+  let [map, setMap] = React.useState(null as mapboxgl.Map | null);
+  const [lng, setLng] = React.useState(-70.9);
+  const [lat, setLat] = React.useState(42.35);
+  const [zoom, setZoom] = React.useState(9);
+  const [mapLoaded, setMapLoaded] = React.useState(false);
 
-  useEffect(() => {
+  React.useEffect(() => {
     map?.setStyle(props.mapStyle.url);
   }, [props.mapStyle]);
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (mapLoaded && map) {
       const source = map.getSource('nodes');
       if (!source && props.nodes.type) {
@@ -60,7 +60,12 @@ const Map = (props: MapProps) => {
         });
 
         map.on('click', 'points', (e) => {
-          if (map && e.features && e.features.length > 0 && e.features[0].properties) {
+          if (
+            map &&
+            e.features &&
+            e.features.length > 0 &&
+            e.features[0].properties
+          ) {
             const properties = e.features[0].properties;
             const position = JSON.parse(properties.position || '{}');
 
@@ -73,31 +78,27 @@ const Map = (props: MapProps) => {
                       {properties?.longName}
                     </div>
                     <ul>
-                      <li>
-                        ID: {properties?.id}
-                      </li>
-                      <li>
-                        Lat: {e.lngLat.lat}
-                      </li>
-                      <li>
-                        Long: {e.lngLat.lng}
-                      </li>
+                      <li>ID: {properties?.id}</li>
+                      <li>Lat: {e.lngLat.lat}</li>
+                      <li>Long: {e.lngLat.lng}</li>
                       <li>
                         Time:&nbsp;
                         {position?.time ? (
                           <span className="whitespace-no-wrap">
-                            {new Date(position.time * 1000).toLocaleTimeString(
-                              [],
-                              { hour: '2-digit', minute: '2-digit' },
-                            )}
+                            {new Date(
+                              position.time * 1000,
+                            ).toLocaleTimeString([], {
+                              hour: '2-digit',
+                              minute: '2-digit',
+                            })}
                           </span>
                         ) : (
                           <span>Unknown</span>
                         )}
                       </li>
                     </ul>
-                  </div>
-                )
+                  </div>,
+                ),
               )
               .addTo(map);
           }
@@ -108,7 +109,7 @@ const Map = (props: MapProps) => {
             map.getCanvas().style.cursor = 'pointer';
           }
         });
-           
+
         map.on('mouseleave', 'points', () => {
           if (map) {
             map.getCanvas().style.cursor = '';
@@ -121,7 +122,7 @@ const Map = (props: MapProps) => {
       }
     }
   }, [props.nodes]);
-  useEffect(() => {
+  React.useEffect(() => {
     const attachMap = (
       setMap: React.Dispatch<React.SetStateAction<any>>,
       mapDiv: React.RefObject<HTMLDivElement>,

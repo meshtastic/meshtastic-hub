@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import { Column, useSortBy, useTable } from 'react-table';
 
@@ -18,7 +18,7 @@ export interface DataTableProps {
   loading: boolean;
 }
 const DataTable = (props: DataTableProps) => {
-  const [selectedNode, setSelectedNode] = useState<
+  const [selectedNode, setSelectedNode] = React.useState<
     NodeDataProperties | undefined
   >();
   const decodeMac = (mac: string) => {
@@ -118,12 +118,12 @@ const DataTable = (props: DataTableProps) => {
     <Disclosure>
       {({ open }) => (
         <>
-          <Disclosure.Button className="flex focus:outline-none group h-8 bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-800 border-gray-300 dark:border-gray-800 cursor-pointer border-b">
+          <Disclosure.Button className="flex w-full focus:outline-none group h-8 bg-white dark:bg-gray-700 hover:bg-gray-100 dark:hover:bg-gray-800 border-gray-300 dark:border-gray-800 cursor-pointer border-b">
             <div className="w-full my-auto mx-4 font-medium">
               <div className="text-gray-600 dark:text-gray-100 group-hover:text-gray-700 dark:group-hover:text-gray-200  flex justify-between">
                 <div className="flex">
                   Nodes:
-                  <div className="bg-gray-300 dark:bg-gray-800 group-hover:bg-gray-400 dark:group-hover:bg-gray-900 ml-2 px-2 rounded-full">
+                  <div className="bg-gray-200 dark:bg-gray-800 group-hover:bg-gray-300 dark:group-hover:bg-gray-900 ml-2 px-2 rounded-full">
                     {props.nodes.length}
                   </div>
                 </div>
@@ -138,7 +138,7 @@ const DataTable = (props: DataTableProps) => {
             </div>
           </Disclosure.Button>
           <Disclosure.Panel className="flex flex-col md:flex-row text-gray-500">
-            <div className="w-full md:w-2/3 bg-gray-100 dark:bg-gray-600 shadow-inner h-80 overflow-auto">
+            <div className="w-full md:w-2/3 bg-white dark:bg-gray-600 shadow-inner h-80 overflow-auto">
               <table {...getTableProps()} className="min-w-full leading-normal">
                 <thead>
                   {headerGroups.map((headerGroup) => (
@@ -148,9 +148,9 @@ const DataTable = (props: DataTableProps) => {
                           {...column.getHeaderProps(
                             column.getSortByToggleProps(),
                           )}
-                          className={`hover:bg-gray-300 dark:hover:bg-gray-800 text-gray-800 dark:text-gray-300 bg-gray-100 dark:bg-gray-600 border-gray-200 dark:border-gray-700 border-b z-40 sticky top-0 px-5  text-left text-sm uppercase font-medium cursor-pointer ${
+                          className={`hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-800 dark:text-gray-300 bg-white dark:bg-gray-600 border-gray-200 dark:border-gray-700 border-b z-40 sticky top-0 sm:px-1 md:px-5  text-left text-sm uppercase font-medium cursor-pointer ${
                             column.isSorted
-                              ? 'bg-gray-200 dark:bg-gray-700'
+                              ? 'bg-gray-100 dark:bg-gray-700'
                               : null
                           }`}
                         >
@@ -177,8 +177,12 @@ const DataTable = (props: DataTableProps) => {
                     return (
                       <tr
                         {...row.getRowProps()}
-                        className={`bg-gray-100 dark:bg-gray-600 hover:bg-gray-300 dark:hover:bg-gray-800 border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-800 cursor-pointer border-b ${
-                          selectedNode ? 'bg-gray-200 dark:bg-gray-700' : null
+                        className={`bg-white dark:bg-gray-600 hover:bg-gray-100 dark:hover:bg-gray-800 border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-800 cursor-pointer border-b ${
+                          selectedNode?.id ===
+                          row.cells.find((cell) => cell.column.id === 'id')
+                            ?.value
+                            ? 'bg-gray-100 dark:bg-gray-700'
+                            : null
                         }`}
                         onClick={() => {
                           setSelectedNode(
@@ -209,7 +213,7 @@ const DataTable = (props: DataTableProps) => {
               </table>
             </div>
 
-            <div className="flex bg-gray-100 dark:bg-gray-600 w-full md:w-1/3">
+            <div className="flex bg-white dark:bg-gray-600 w-full md:w-1/3">
               {selectedNode ? (
                 <div className="m-auto font-medium">
                   Selected: {selectedNode.id}

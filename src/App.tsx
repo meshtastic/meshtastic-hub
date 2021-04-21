@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 
 import DataTable from './Components/DataTable/DataTable';
 import Map from './Components/Map';
@@ -15,20 +15,20 @@ export interface position {
 }
 
 function App() {
-  const [nodes, setNodes] = useState({} as GeoJSON.FeatureCollection);
-  const [currentPosition, setCurrentPosition] = useState<position>({
+  const [nodes, setNodes] = React.useState({} as GeoJSON.FeatureCollection);
+  const [currentPosition, setCurrentPosition] = React.useState<position>({
     lat: 0,
     lng: 0,
   });
-  const [darkmode, setDarkmode] = useState<boolean>(false);
-  const [mapStyle, setMapStyle] = useState<MapStyle>(
+  const [darkmode, setDarkmode] = React.useState<boolean>(false);
+  const [mapStyle, setMapStyle] = React.useState<MapStyle>(
     getDefaultMapStyle(darkmode, MapStyles.Light),
   );
-  useEffect(() => {
+  React.useEffect(() => {
     setMapStyle(getDefaultMapStyle(darkmode, mapStyle));
   }, [darkmode]);
 
-  useEffect(() => {
+  React.useEffect(() => {
     fetch('https://hub.meshtastic.org/v1/geoJSON/nodes')
       .then((response) => response.json())
       .then((data) => {
