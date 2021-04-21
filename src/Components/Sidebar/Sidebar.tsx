@@ -44,7 +44,7 @@ const Sidebar = (props: SidebarProps) => {
         <div className="flex items-center justify-center py-6">
           <img className="h-12" src={props.darkmode ? logoWhite : logoBlack} />
         </div>
-        <nav className="space-y-2 pb-2">
+        <nav className="space-y-2 pb-2 px-2">
           <MapStyleSelect
             mapStyle={props.mapStyle}
             setMapStyle={props.setMapStyle}
@@ -56,6 +56,7 @@ const Sidebar = (props: SidebarProps) => {
             darkmode={props.darkmode}
             setDarkmode={props.setDarkmode}
           />
+          {/* <MQTT /> */}
         </nav>
       </div>
     </div>

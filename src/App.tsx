@@ -24,15 +24,25 @@ function App() {
   const [mapStyle, setMapStyle] = useState<MapStyle>(
     getDefaultMapStyle(darkmode, MapStyles.Light),
   );
+  useEffect(() => {
+    setMapStyle(getDefaultMapStyle(darkmode, mapStyle));
+  }, [darkmode]);
 
   useEffect(() => {
-    setInterval(async () => {
-      fetch('https://hub.meshtastic.org/v1/geoJSON/nodes')
-        .then((response) => response.json())
-        .then((data) => {
-          setNodes(data);
-        });
-    }, 3000);
+    fetch('https://hub.meshtastic.org/v1/geoJSON/nodes')
+      .then((response) => response.json())
+      .then((data) => {
+        setNodes(data);
+      })
+      .then(() => {
+        setInterval(async () => {
+          fetch('https://hub.meshtastic.org/v1/geoJSON/nodes')
+            .then((response) => response.json())
+            .then((data) => {
+              setNodes(data);
+            });
+        }, 20000);
+      });
   }, []);
   return (
     <div
@@ -40,7 +50,7 @@ function App() {
         darkmode ? 'dark' : null
       }`}
     >
-      <div className="flex relative h-full overflow-hidden">
+      <div className="flex flex-col relative h-full overflow-hidden">
         <Map
           nodes={nodes}
           darkmode={darkmode}
@@ -58,10 +68,6 @@ function App() {
           position={currentPosition}
           darkmode={darkmode}
           setDarkmode={setDarkmode}
-          // setDarkmode={(data: any) => {
-          //   setDarkmode(data);
-          //   setMapStyle(getDefaultMapStyle(data, mapStyle));
-          // }}
           setMapStyle={setMapStyle}
           mapStyle={mapStyle}
         />

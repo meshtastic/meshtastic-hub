@@ -11,10 +11,12 @@
   "dependencies": {
     "@headlessui/react": "^1.0.0",
     "@heroicons/react": "^1.0.1",
-    "@jdiamond/mqtt-browser": "^0.1.1",
+    "@jdiamond/mqtt-browser": "^0.1.2",
+    "framer-motion": "^4.1.5",
     "mapbox-gl": "^2.2.0",
     "react": "^17.0.0",
-    "react-dom": "^17.0.0"
+    "react-dom": "^17.0.0",
+    "react-table": "^7.6.3"
   },
   "devDependencies": {
     "@babel/core": "^7.13.15",
@@ -35,6 +37,7 @@
     "@types/mocha": "^8.2.0",
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
+    "@types/react-table": "^7.0.29",
     "@types/snowpack-env": "^2.3.2",
     "@web/test-runner": "^0.12.0",
     "autoprefixer": "^10.2.5",
