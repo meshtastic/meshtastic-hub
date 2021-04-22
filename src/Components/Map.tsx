@@ -28,7 +28,25 @@ const Map = (props: MapProps) => {
     map?.setStyle(props.mapStyle.url);
   }, [props.mapStyle]);
 
+  const getLocation = () => {
+    navigator.geolocation.getCurrentPosition((location) => {
+      setLat(location.coords.latitude);
+      setLng(location.coords.longitude);
+    });
+  };
+
   React.useEffect(() => {
+    const center = map?.getCenter();
+    if (lat !== center?.lat && lng !== center?.lng) {
+      map?.setCenter({
+        lat,
+        lng,
+      });
+    }
+  }, [lat, lng]);
+
+  React.useEffect(() => {
+    getLocation();
     if (mapLoaded && map) {
       const source = map.getSource('nodes');
       if (!source && props.nodes.type) {
@@ -85,12 +103,13 @@ const Map = (props: MapProps) => {
                         Time:&nbsp;
                         {position?.time ? (
                           <span className="whitespace-no-wrap">
-                            {new Date(
-                              position.time * 1000,
-                            ).toLocaleTimeString([], {
-                              hour: '2-digit',
-                              minute: '2-digit',
-                            })}
+                            {new Date(position.time * 1000).toLocaleTimeString(
+                              [],
+                              {
+                                hour: '2-digit',
+                                minute: '2-digit',
+                              },
+                            )}
                           </span>
                         ) : (
                           <span>Unknown</span>
