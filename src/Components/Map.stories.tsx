@@ -3,7 +3,7 @@ import React from 'react';
 import type { Meta, Story } from '@storybook/react';
 
 import Map, { MapProps } from './Map';
-import { MapStyles } from './Sidebar/MapStyleSelect';
+import { MapStyles } from './Sidebar/MapStyleSelector';
 
 export default {
   title: 'Meshtastic HUB/Map',

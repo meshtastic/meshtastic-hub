@@ -2,18 +2,18 @@ import React from 'react';
 
 import type { Meta, Story } from '@storybook/react';
 
-import MapStyleSelect, {
+import MapStyleSelector, {
   MapStyles,
-  MapStyleSelectProps,
-} from './MapStyleSelect';
+  MapStyleSelectorProps,
+} from './MapStyleSelector';
 
 export default {
   title: 'Meshtastic HUB/Sidebar/MapStyleSelect',
-  component: MapStyleSelect,
+  component: MapStyleSelector,
 } as Meta;
 
-const Template: Story<MapStyleSelectProps> = (args) => (
-  <MapStyleSelect {...args} />
+const Template: Story<MapStyleSelectorProps> = (args) => (
+  <MapStyleSelector {...args} />
 );
 
 export const Default = Template.bind({});

@@ -6,7 +6,7 @@ import {
   getDefaultMapStyle,
   MapStyle,
   MapStyles,
-} from './Components/Sidebar/MapStyleSelect';
+} from './Components/Sidebar/MapStyleSelector';
 import Sidebar, { NodeDataProperties } from './Components/Sidebar/Sidebar';
 
 export interface position {

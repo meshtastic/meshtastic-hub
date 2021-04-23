@@ -118,12 +118,12 @@ const DataTable = (props: DataTableProps) => {
     <Disclosure>
       {({ open }) => (
         <>
-          <Disclosure.Button className="w-full focus:outline-none group bg-white dark:bg-gray-700 hover:bg-gray-100 dark:hover:bg-gray-800 border-gray-300 dark:border-gray-800 cursor-pointer border-b">
+          <Disclosure.Button className="z-50 w-full focus:outline-none group bg-white dark:bg-gray-700 hover:bg-gray-100 dark:hover:bg-gray-800 border-gray-300 dark:border-gray-800 cursor-pointer border-b">
             <div className="flex h-8 w-full font-medium">
               <div className="flex mx-4 w-full my-auto text-gray-600 dark:text-gray-100 group-hover:text-gray-700 dark:group-hover:text-gray-200 justify-between">
                 <div className="flex">
                   Nodes:
-                  <div className="bg-gray-200 dark:bg-gray-800 group-hover:bg-gray-300 dark:group-hover:bg-gray-900 ml-2 px-2 rounded-full">
+                  <div className="bg-gray-200 dark:bg-gray-800 group-hover:bg-gray-300 dark:group-hover:bg-gray-900 border ml-2 px-2 rounded-full">
                     {props.nodes.length}
                   </div>
                 </div>
@@ -137,7 +137,7 @@ const DataTable = (props: DataTableProps) => {
               </div>
             </div>
           </Disclosure.Button>
-          <Disclosure.Panel className="flex flex-col md:flex-row text-gray-500">
+          <Disclosure.Panel className="flex flex-col z-50 md:flex-row text-gray-500">
             <div className="w-full md:w-2/3 bg-white dark:bg-gray-600 shadow-inner h-80 overflow-auto">
               <table {...getTableProps()} className="min-w-full leading-normal">
                 <thead>

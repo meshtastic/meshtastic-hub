@@ -6,7 +6,7 @@ import mapboxgl from 'mapbox-gl';
 import { renderToString } from 'react-dom/server';
 import type { position } from 'src/App';
 
-import { getDefaultMapStyle, MapStyle } from './Sidebar/MapStyleSelect';
+import { getDefaultMapStyle, MapStyle } from './Sidebar/MapStyleSelector';
 
 export interface MapProps {
   nodes: GeoJSON.FeatureCollection;
@@ -37,7 +37,7 @@ const Map = (props: MapProps) => {
 
   React.useEffect(() => {
     const center = map?.getCenter();
-    if (lat !== center?.lat && lng !== center?.lng) {
+    if (lat !== center?.lat || lng !== center?.lng) {
       map?.setCenter({
         lat,
         lng,
