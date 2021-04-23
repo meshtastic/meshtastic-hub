@@ -12,6 +12,7 @@ import {
 
 import Badge from '../Generic/Badge';
 import type { NodeDataProperties } from '../Sidebar/Sidebar';
+import NodeView from './NodeView';
 
 export interface DataTableProps {
   nodes: NodeDataProperties[];
@@ -215,9 +216,7 @@ const DataTable = (props: DataTableProps) => {
 
             <div className="flex bg-white dark:bg-gray-600 w-full md:w-1/3">
               {selectedNode ? (
-                <div className="m-auto font-medium">
-                  Selected: {selectedNode.id}
-                </div>
+                <NodeView node={selectedNode} />
               ) : (
                 <div className="m-auto font-medium">No node selected.</div>
               )}
