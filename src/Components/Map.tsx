@@ -22,6 +22,7 @@ const Map = (props: MapProps) => {
   const [lng, setLng] = React.useState(-70.9);
   const [lat, setLat] = React.useState(42.35);
   const [zoom, setZoom] = React.useState(9);
+  const [gpsFound, setGpsFound] = React.useState<boolean>(false);
   const [mapLoaded, setMapLoaded] = React.useState(false);
 
   React.useEffect(() => {
@@ -29,15 +30,18 @@ const Map = (props: MapProps) => {
   }, [props.mapStyle]);
 
   const getLocation = () => {
-    navigator.geolocation.getCurrentPosition((location) => {
-      setLat(location.coords.latitude);
-      setLng(location.coords.longitude);
-    });
+    if (!gpsFound) {
+      navigator.geolocation.getCurrentPosition((location) => {
+        setLat(location.coords.latitude);
+        setLng(location.coords.longitude);
+      });
+      setGpsFound(true);
+    }
   };
 
   React.useEffect(() => {
     const center = map?.getCenter();
-    if (lat !== center?.lat || lng !== center?.lng) {
+    if (lat !== center?.lat && lng !== center?.lng) {
       map?.setCenter({
         lat,
         lng,
