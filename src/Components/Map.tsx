@@ -7,6 +7,7 @@ import { renderToString } from 'react-dom/server';
 import type { position } from 'src/App';
 
 import { getDefaultMapStyle, MapStyle } from './Sidebar/MapStyleSelector';
+import type { NodeDataProperties } from './Sidebar/Sidebar';
 
 export interface MapProps {
   nodes: GeoJSON.FeatureCollection;
@@ -14,6 +15,7 @@ export interface MapProps {
   mapStyle: MapStyle;
   setPosition: React.Dispatch<React.SetStateAction<position>>;
 }
+
 const Map = (props: MapProps) => {
   mapboxgl.accessToken =
     'pk.eyJ1Ijoic2FjaGF3IiwiYSI6ImNrNW9meXozZjBsdW0zbHBjM2FnNnV6cmsifQ.3E4n8eFGD9ZOFo-XDVeZnQ';
@@ -23,7 +25,6 @@ const Map = (props: MapProps) => {
   const [lat, setLat] = React.useState(42.35);
   const [zoom, setZoom] = React.useState(9);
   const [gpsFound, setGpsFound] = React.useState<boolean>(false);
-  const [mapLoaded, setMapLoaded] = React.useState(false);
 
   React.useEffect(() => {
     map?.setStyle(props.mapStyle.url);
@@ -39,6 +40,76 @@ const Map = (props: MapProps) => {
     }
   };
 
+  const PlaceNodes = () => {
+    if (map) {
+      if (props.nodes.type) {
+        props.nodes.features.forEach((node) => {
+          let data = node.properties as NodeDataProperties;
+          if (map) {
+            new mapboxgl.Marker({})
+              .setLngLat({
+                lat: data.position?.latitudeI
+                  ? data.position.latitudeI / 1e7
+                  : 90,
+                lng: data.position?.longitudeI
+                  ? data.position.longitudeI / 1e7
+                  : 90,
+              })
+              .setPopup(
+                new mapboxgl.Popup().setHTML(
+                  renderToString(
+                    <div>
+                      <div className="text-xl font-medium">{data.longName}</div>
+                      <ul>
+                        <li>ID: {data.id}</li>
+                        <li>Lat: {data.position?.latitudeI}</li>
+                        <li>Long: {data.position?.longitudeI}</li>
+                        <li>
+                          Time:&nbsp;
+                          {data.position?.time ? (
+                            <span className="whitespace-no-wrap">
+                              {new Date(
+                                data.position.time * 1000,
+                              ).toLocaleTimeString([], {
+                                hour: '2-digit',
+                                minute: '2-digit',
+                              })}
+                            </span>
+                          ) : (
+                            <span>Unknown</span>
+                          )}
+                        </li>
+                      </ul>
+                    </div>,
+                  ),
+                ),
+              )
+
+              /**
+               * @todo this is broken
+               */
+              .on('mouseenter', () => {
+                if (map) {
+                  map.getCanvas().style.cursor = 'pointer';
+                }
+              })
+
+              /**
+               * @todo this is broken
+               */
+              .on('mouseleave', () => {
+                if (map) {
+                  map.getCanvas().style.cursor = '';
+                }
+              })
+
+              .addTo(map);
+          }
+        });
+      }
+    }
+  };
+
   React.useEffect(() => {
     const center = map?.getCenter();
     if (lat !== center?.lat && lng !== center?.lng) {
@@ -50,101 +121,9 @@ const Map = (props: MapProps) => {
   }, [lat, lng]);
 
   React.useEffect(() => {
-    getLocation();
-    if (mapLoaded && map) {
-      const source = map.getSource('nodes');
-      if (!source && props.nodes.type) {
-        map.addSource('nodes', {
-          type: 'geojson',
-          data: props.nodes,
-        });
-        map.loadImage(
-          'https://docs.mapbox.com/mapbox-gl-js/assets/custom_marker.png',
-          function (error, image) {
-            if (image) {
-              map?.addImage('custom-marker', image);
-            }
-          },
-        );
-
-        map.addLayer({
-          id: 'points',
-          type: 'symbol',
-          source: 'nodes',
-
-          layout: {
-            'icon-image': 'custom-marker',
-            'text-field': ['get', 'title'],
-            'text-font': ['Open Sans Semibold', 'Arial Unicode MS Bold'],
-            'text-offset': [0, 1.25],
-            'text-anchor': 'top',
-          },
-        });
-
-        map.on('click', 'points', (e) => {
-          if (
-            map &&
-            e.features &&
-            e.features.length > 0 &&
-            e.features[0].properties
-          ) {
-            const properties = e.features[0].properties;
-            const position = JSON.parse(properties.position || '{}');
-
-            new mapboxgl.Popup()
-              .setLngLat(e.lngLat)
-              .setHTML(
-                renderToString(
-                  <div>
-                    <div className="text-xl font-medium">
-                      {properties?.longName}
-                    </div>
-                    <ul>
-                      <li>ID: {properties?.id}</li>
-                      <li>Lat: {e.lngLat.lat}</li>
-                      <li>Long: {e.lngLat.lng}</li>
-                      <li>
-                        Time:&nbsp;
-                        {position?.time ? (
-                          <span className="whitespace-no-wrap">
-                            {new Date(position.time * 1000).toLocaleTimeString(
-                              [],
-                              {
-                                hour: '2-digit',
-                                minute: '2-digit',
-                              },
-                            )}
-                          </span>
-                        ) : (
-                          <span>Unknown</span>
-                        )}
-                      </li>
-                    </ul>
-                  </div>,
-                ),
-              )
-              .addTo(map);
-          }
-        });
-
-        map.on('mouseenter', 'points', () => {
-          if (map) {
-            map.getCanvas().style.cursor = 'pointer';
-          }
-        });
-
-        map.on('mouseleave', 'points', () => {
-          if (map) {
-            map.getCanvas().style.cursor = '';
-          }
-        });
-      } else {
-        if (source.type === 'geojson') {
-          source.setData(props.nodes);
-        }
-      }
-    }
+    PlaceNodes();
   }, [props.nodes]);
+
   React.useEffect(() => {
     const attachMap = (
       setMap: React.Dispatch<React.SetStateAction<any>>,
@@ -162,7 +141,7 @@ const Map = (props: MapProps) => {
       setMap(map);
 
       map.on('load', () => {
-        setMapLoaded(true);
+        getLocation();
         map.addSource('mapbox-dem', {
           type: 'raster-dem',
           url: 'mapbox://mapbox.mapbox-terrain-dem-v1',
@@ -182,6 +161,7 @@ const Map = (props: MapProps) => {
             'sky-atmosphere-sun-intensity': 15,
           },
         });
+        PlaceNodes();
       });
 
       map.on('move', () => {
