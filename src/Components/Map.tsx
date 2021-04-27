@@ -14,6 +14,7 @@ export interface MapProps {
   darkmode: boolean;
   mapStyle: MapStyle;
   setPosition: React.Dispatch<React.SetStateAction<position>>;
+  position: position;
 }
 
 const Map = (props: MapProps) => {
@@ -123,6 +124,13 @@ const Map = (props: MapProps) => {
   React.useEffect(() => {
     PlaceNodes();
   }, [props.nodes]);
+  
+  React.useEffect(() => {
+    if (props.position.lat && props.position.lng) {
+      setLat(props.position.lat);
+      setLng(props.position.lng);
+    }
+  }, [props.position.lat, props.position.lng])
 
   React.useEffect(() => {
     const attachMap = (

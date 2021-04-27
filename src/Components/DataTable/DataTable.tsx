@@ -13,10 +13,12 @@ import {
 import Badge from '../Generic/Badge';
 import type { NodeDataProperties } from '../Sidebar/Sidebar';
 import NodeView from './NodeView';
+import type { position } from '../../App';
 
 export interface DataTableProps {
   nodes: NodeDataProperties[];
   loading: boolean;
+  setPosition: React.Dispatch<React.SetStateAction<position>>;
 }
 const DataTable = (props: DataTableProps) => {
   const [selectedNode, setSelectedNode] = React.useState<
@@ -216,7 +218,10 @@ const DataTable = (props: DataTableProps) => {
 
             <div className="flex bg-white dark:bg-gray-600 w-full md:w-1/3">
               {selectedNode ? (
-                <NodeView node={selectedNode} />
+                <NodeView 
+                  node={selectedNode}
+                  setPosition={props.setPosition}
+                />
               ) : (
                 <div className="m-auto font-medium">No node selected.</div>
               )}
