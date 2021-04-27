@@ -10,7 +10,7 @@ const MQTT = (props: MQTTProps) => {
     {
       node: string;
       packetType: 'TEXT_MESSAGE_APP' | 'NODEINFO_APP' | 'POSITION_APP';
-      data: Object;
+      data: any;
     }[]
   >([]);
   const mqtt = async () => {
