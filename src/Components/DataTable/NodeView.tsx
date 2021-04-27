@@ -9,9 +9,11 @@ import {
 
 import Badge from '../Generic/Badge';
 import type { NodeDataProperties } from '../Sidebar/Sidebar';
+import type { position } from '../../App';
 
 export interface NodeViewProps {
   node: NodeDataProperties;
+  setPosition: React.Dispatch<React.SetStateAction<position>>;
 }
 
 const NodeView = (props: NodeViewProps) => {
@@ -44,7 +46,14 @@ const NodeView = (props: NodeViewProps) => {
                   : 'UNK'}
               </div>
             </div>
-            <div className="flex group cursor-pointer">
+            <div className="flex group cursor-pointer" onClick={() => {
+              if (props.node.position?.latitudeI && props.node.position?.longitudeI) {
+                props.setPosition({
+                  lat: (props.node.position.latitudeI / 1e7),
+                  lng: (props.node.position.longitudeI / 1e7),
+                });
+              }
+            }}>
               <LocationMarkerIcon className="w-5 h-5 my-auto group-hover:text-gray-700 mr-1" />
               <div className="text-sm my-auto group-hover:text-gray-700">
                 {props.node.position?.latitudeI &&

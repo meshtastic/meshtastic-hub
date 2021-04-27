@@ -55,6 +55,7 @@ function App() {
           nodes={nodes}
           darkmode={darkmode}
           setPosition={setCurrentPosition}
+          position={currentPosition}
           mapStyle={mapStyle}
         />
         <Sidebar
@@ -80,6 +81,7 @@ function App() {
               : []
           }
           loading={!Object.keys(nodes).length}
+          setPosition={setCurrentPosition}
         />
       </div>
     </div>
