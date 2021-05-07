@@ -81,12 +81,12 @@ const DataTable = (props: DataTableProps) => {
               id: node.user?.id ? (
                 node.user.id
               ) : (
-                <Badge message="Unknown" variant="Neutral" />
+                <Badge message="N/A" variant="Neutral" />
               ),
               mac: node.user?.macaddr ? (
                 decodeMac(node.user.macaddr)
               ) : (
-                <Badge message="Unknown" variant="Neutral" />
+                <Badge message="N/A" variant="Neutral" />
               ),
               time: node.position?.time ? (
                 new Date(node.position.time * 1000).toLocaleTimeString([], {
@@ -94,7 +94,7 @@ const DataTable = (props: DataTableProps) => {
                   minute: '2-digit',
                 })
               ) : (
-                <Badge message="Unknown" variant="Neutral" />
+                <Badge message="N/A" variant="Neutral" />
               ),
               battery: node.position?.batteryLevel ? (
                 node.position.batteryLevel < 33 ? (
@@ -114,7 +114,7 @@ const DataTable = (props: DataTableProps) => {
                   />
                 )
               ) : (
-                <Badge message="Unknown" variant="Neutral" />
+                <Badge message="N/A" variant="Neutral" />
               ),
             };
           })
@@ -160,7 +160,7 @@ const DataTable = (props: DataTableProps) => {
             </div>
           </Disclosure.Button>
           <Disclosure.Panel className="flex flex-col z-50 md:flex-row text-gray-500">
-            <div className="w-full md:w-2/3 bg-white dark:bg-gray-600 shadow-inner h-80 overflow-auto">
+            <div className="w-full bg-white dark:bg-gray-600 shadow-inner h-80 overflow-auto">
               <table {...getTableProps()} className="min-w-full leading-normal">
                 <thead>
                   {headerGroups.map((headerGroup) => (
@@ -170,7 +170,7 @@ const DataTable = (props: DataTableProps) => {
                           {...column.getHeaderProps(
                             column.getSortByToggleProps(),
                           )}
-                          className={`hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-800 dark:text-gray-300 bg-white dark:bg-gray-600 border-gray-200 dark:border-gray-700 border-b z-40 sticky top-0 sm:px-1 md:px-5  text-left text-sm uppercase font-medium cursor-pointer ${
+                          className={`hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-800 dark:text-gray-300 bg-white dark:bg-gray-600 border-gray-200 dark:border-gray-700 border-b z-40 sticky top-0 px-2 md:px-5  text-left text-sm uppercase font-medium cursor-pointer ${
                             column.isSorted
                               ? 'bg-gray-100 dark:bg-gray-700'
                               : null
@@ -207,22 +207,26 @@ const DataTable = (props: DataTableProps) => {
                             : null
                         }`}
                         onClick={() => {
-                          setSelectedNode(
-                            props.nodes.find(
-                              (node) =>
-                                node.id ===
-                                row.cells.find(
-                                  (cell) => cell.column.id === 'id',
-                                )?.value,
-                            ),
-                          );
+                          props.nodes.find(
+                            (node) => node.id === selectedNode?.id,
+                          )
+                            ? setSelectedNode(undefined)
+                            : setSelectedNode(
+                                props.nodes.find(
+                                  (node) =>
+                                    node.id ===
+                                    row.cells.find(
+                                      (cell) => cell.column.id === 'id',
+                                    )?.value,
+                                ),
+                              );
                         }}
                       >
                         {row.cells.map((cell) => {
                           return (
                             <td
                               {...cell.getCellProps()}
-                              className="text-gray-900 dark:text-gray-200 sm:px-1 md:px-5 py-1 text-sm"
+                              className="text-gray-900 dark:text-gray-200 px-2 md:px-5 py-1 text-sm"
                             >
                               {cell.render('Cell')}
                             </td>
