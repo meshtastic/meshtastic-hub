@@ -10,10 +10,29 @@ import {
   SortDescendingIcon,
 } from '@heroicons/react/outline';
 
-import Badge from '../Generic/Badge';
-import type { NodeDataProperties } from '../Sidebar/Sidebar';
-import NodeView from './NodeView';
 import type { position } from '../../App';
+import Badge from '../Generic/Badge';
+import NodeView from './NodeView';
+
+export interface NodeDataProperties {
+  id: string;
+  lastHeard?: number;
+  longName?: string;
+  position?: {
+    altitude?: number;
+    batteryLevel?: number;
+    latitudeI?: number;
+    longitudeI?: number;
+    time?: number;
+  };
+  user?: {
+    hwModel?: string; //enum
+    id?: string;
+    longName?: string;
+    macaddr?: string;
+    shortName?: string;
+  };
+}
 
 export interface DataTableProps {
   nodes: NodeDataProperties[];
@@ -218,10 +237,7 @@ const DataTable = (props: DataTableProps) => {
 
             <div className="flex bg-white dark:bg-gray-600 w-full md:w-1/3">
               {selectedNode ? (
-                <NodeView 
-                  node={selectedNode}
-                  setPosition={props.setPosition}
-                />
+                <NodeView node={selectedNode} setPosition={props.setPosition} />
               ) : (
                 <div className="m-auto font-medium">No node selected.</div>
               )}

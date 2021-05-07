@@ -1,13 +1,15 @@
 import React from 'react';
 
-import DataTable from './Components/DataTable/DataTable';
+import DataTable, {
+  NodeDataProperties,
+} from './Components/DataTable/DataTable';
 import Map from './Components/Map';
 import {
   getDefaultMapStyle,
   MapStyle,
   MapStyles,
 } from './Components/Sidebar/MapStyleSelector';
-import Sidebar, { NodeDataProperties } from './Components/Sidebar/Sidebar';
+import Sidebar from './Components/Sidebar/Sidebar';
 
 export interface position {
   lat: number;
@@ -50,14 +52,27 @@ function App() {
         darkmode ? 'dark' : null
       }`}
     >
-      <div className="flex flex-col relative h-full overflow-hidden">
-        <Map
-          nodes={nodes}
-          darkmode={darkmode}
-          setPosition={setCurrentPosition}
-          position={currentPosition}
-          mapStyle={mapStyle}
-        />
+      <div className="flex flex-col md:flex-row relative h-full overflow-hidden">
+        <div className="flex flex-col relative h-full overflow-hidden">
+          <Map
+            nodes={nodes}
+            darkmode={darkmode}
+            setPosition={setCurrentPosition}
+            position={currentPosition}
+            mapStyle={mapStyle}
+          />
+          <DataTable
+            nodes={
+              Object.keys(nodes).length
+                ? nodes.features.map((node) => {
+                    return node.properties as NodeDataProperties;
+                  })
+                : []
+            }
+            loading={!Object.keys(nodes).length}
+            setPosition={setCurrentPosition}
+          />
+        </div>
         <Sidebar
           nodes={
             Object.keys(nodes).length
@@ -71,17 +86,6 @@ function App() {
           setDarkmode={setDarkmode}
           setMapStyle={setMapStyle}
           mapStyle={mapStyle}
-        />
-        <DataTable
-          nodes={
-            Object.keys(nodes).length
-              ? nodes.features.map((node) => {
-                  return node.properties as NodeDataProperties;
-                })
-              : []
-          }
-          loading={!Object.keys(nodes).length}
-          setPosition={setCurrentPosition}
         />
       </div>
     </div>

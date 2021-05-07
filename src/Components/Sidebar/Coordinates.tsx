@@ -10,7 +10,7 @@ export interface CoordinatesProps {
 
 const Coordinates = (props: CoordinatesProps) => {
   return (
-    <div className="flex bg-white dark:bg-gray-700 text-gray-600 dark:text-gray-100 h-10 shadow-md border rounded-md">
+    <div className="flex bg-white dark:bg-gray-700 text-gray-600 dark:text-gray-100 h-10 shadow-md border rounded-md w-full md:w-72">
       <div className="flex my-auto mx-2">
         <LocationMarkerIcon className="w-5 h-5 mr-2 my-auto" />
         <div className="mx-auto text-lg">

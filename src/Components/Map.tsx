@@ -6,8 +6,8 @@ import mapboxgl from 'mapbox-gl';
 import { renderToString } from 'react-dom/server';
 import type { position } from 'src/App';
 
+import type { NodeDataProperties } from './DataTable/DataTable';
 import { getDefaultMapStyle, MapStyle } from './Sidebar/MapStyleSelector';
-import type { NodeDataProperties } from './Sidebar/Sidebar';
 
 export interface MapProps {
   nodes: GeoJSON.FeatureCollection;
@@ -124,13 +124,13 @@ const Map = (props: MapProps) => {
   React.useEffect(() => {
     PlaceNodes();
   }, [props.nodes]);
-  
+
   React.useEffect(() => {
     if (props.position.lat && props.position.lng) {
       setLat(props.position.lat);
       setLng(props.position.lng);
     }
-  }, [props.position.lat, props.position.lng])
+  }, [props.position.lat, props.position.lng]);
 
   React.useEffect(() => {
     const attachMap = (
