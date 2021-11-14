@@ -1,12 +1,11 @@
 import React from 'react';
 
-import DataTable, {
-  NodeDataProperties,
-} from './Components/DataTable/DataTable';
+import type { NodeDataProperties } from './Components/DataTable/DataTable';
+import { DataTable } from './Components/DataTable/DataTable';
 import Map from './Components/Map';
+import type { MapStyle } from './Components/Sidebar/MapStyleSelector';
 import {
   getDefaultMapStyle,
-  MapStyle,
   MapStyles,
 } from './Components/Sidebar/MapStyleSelector';
 import Sidebar from './Components/Sidebar/Sidebar';

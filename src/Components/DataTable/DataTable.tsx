@@ -39,7 +39,7 @@ export interface DataTableProps {
   loading: boolean;
   setPosition: React.Dispatch<React.SetStateAction<position>>;
 }
-const DataTable = (props: DataTableProps) => {
+export const DataTable = (props: DataTableProps) => {
   const [selectedNode, setSelectedNode] = React.useState<
     NodeDataProperties | undefined
   >();
@@ -122,30 +122,25 @@ const DataTable = (props: DataTableProps) => {
     [props.nodes],
   );
 
-  const {
-    getTableProps,
-    getTableBodyProps,
-    headerGroups,
-    rows,
-    prepareRow,
-  } = useTable(
-    {
-      columns,
-      data,
-    },
-    useSortBy,
-  );
+  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
+    useTable(
+      {
+        columns,
+        data,
+      },
+      useSortBy,
+    );
 
   return (
     <Disclosure>
       {({ open }) => (
         <>
-          <Disclosure.Button className="z-50 w-full focus:outline-none group bg-white dark:bg-gray-700 hover:bg-gray-100 dark:hover:bg-gray-800 border-gray-300 dark:border-gray-800 cursor-pointer border-b">
-            <div className="flex h-8 w-full font-medium">
-              <div className="flex mx-4 w-full my-auto text-gray-600 dark:text-gray-100 group-hover:text-gray-700 dark:group-hover:text-gray-200 justify-between">
+          <Disclosure.Button className="z-50 w-full bg-white border-b border-gray-300 cursor-pointer focus:outline-none group dark:bg-gray-700 hover:bg-gray-100 dark:hover:bg-gray-800 dark:border-gray-800">
+            <div className="flex w-full h-8 font-medium">
+              <div className="flex justify-between w-full mx-4 my-auto text-gray-600 dark:text-gray-100 group-hover:text-gray-700 dark:group-hover:text-gray-200">
                 <div className="flex">
                   Nodes:
-                  <div className="bg-gray-200 dark:bg-gray-800 group-hover:bg-gray-300 dark:group-hover:bg-gray-900 border ml-2 px-2 rounded-full">
+                  <div className="px-2 ml-2 bg-gray-200 border rounded-full dark:bg-gray-800 group-hover:bg-gray-300 dark:group-hover:bg-gray-900">
                     {props.nodes.length}
                   </div>
                 </div>
@@ -159,8 +154,8 @@ const DataTable = (props: DataTableProps) => {
               </div>
             </div>
           </Disclosure.Button>
-          <Disclosure.Panel className="flex flex-col z-50 md:flex-row text-gray-500">
-            <div className="w-full bg-white dark:bg-gray-600 shadow-inner h-80 overflow-auto">
+          <Disclosure.Panel className="z-50 flex flex-col text-gray-500 md:flex-row">
+            <div className="w-full overflow-auto bg-white shadow-inner dark:bg-gray-600 h-80">
               <table {...getTableProps()} className="min-w-full leading-normal">
                 <thead>
                   {headerGroups.map((headerGroup) => (
@@ -226,7 +221,7 @@ const DataTable = (props: DataTableProps) => {
                           return (
                             <td
                               {...cell.getCellProps()}
-                              className="text-gray-900 dark:text-gray-200 px-2 md:px-5 py-1 text-sm"
+                              className="px-2 py-1 text-sm text-gray-900 dark:text-gray-200 md:px-5"
                             >
                               {cell.render('Cell')}
                             </td>
@@ -239,7 +234,7 @@ const DataTable = (props: DataTableProps) => {
               </table>
             </div>
 
-            <div className="flex bg-white dark:bg-gray-600 w-full md:w-1/3">
+            <div className="flex w-full bg-white dark:bg-gray-600 md:w-1/3">
               {selectedNode ? (
                 <NodeView node={selectedNode} setPosition={props.setPosition} />
               ) : (
@@ -252,5 +247,3 @@ const DataTable = (props: DataTableProps) => {
     </Disclosure>
   );
 };
-
-export default DataTable;

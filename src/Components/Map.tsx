@@ -7,7 +7,8 @@ import { renderToString } from 'react-dom/server';
 import type { position } from 'src/App';
 
 import type { NodeDataProperties } from './DataTable/DataTable';
-import { getDefaultMapStyle, MapStyle } from './Sidebar/MapStyleSelector';
+import type { MapStyle } from './Sidebar/MapStyleSelector';
+import { getDefaultMapStyle } from './Sidebar/MapStyleSelector';
 
 export interface MapProps {
   nodes: GeoJSON.FeatureCollection;

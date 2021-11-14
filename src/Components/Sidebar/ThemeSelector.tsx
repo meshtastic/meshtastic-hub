@@ -1,4 +1,4 @@
-import React from 'react';
+import type React from 'react';
 
 import { ColorSwatchIcon, MoonIcon, SunIcon } from '@heroicons/react/outline';
 
@@ -9,28 +9,28 @@ export interface ThemeSelectorProps {
 
 const ThemeSelector = (props: ThemeSelectorProps) => {
   return (
-    <div className="flex bg-white dark:bg-gray-700 text-gray-600 dark:text-gray-100 h-10 shadow-md border rounded-md">
-      <div className="flex justify-between my-auto px-2 w-full">
+    <div className="flex h-10 text-gray-600 bg-white border rounded-md shadow-md dark:bg-gray-700 dark:text-gray-100">
+      <div className="flex justify-between w-full px-2 my-auto">
         <div className="flex my-auto ">
-          <ColorSwatchIcon className="w-5 h-5 mr-2 my-auto" />
-          <div className="text-lg my-auto">Theme</div>
+          <ColorSwatchIcon className="w-5 h-5 my-auto mr-2" />
+          <div className="my-auto text-lg">Theme</div>
         </div>
         <div className="flex space-x-2">
           <div
-            className="flex my-auto h-8 w-8 rounded-full cursor-pointer shadow-md bg-white hover:bg-gray-100 border text-gray-600"
+            className="flex w-8 h-8 my-auto text-gray-600 bg-white border rounded-full shadow-md cursor-pointer hover:bg-gray-100"
             onClick={() => {
               props.setDarkmode(false);
             }}
           >
-            <SunIcon className="m-auto w-4 h-4" />
+            <SunIcon className="w-4 h-4 m-auto" />
           </div>
           <div
-            className="flex my-auto h-8 w-8 rounded-full cursor-pointer shadow-md bg-gray-700 hover:bg-gray-800 border text-gray-200"
+            className="flex w-8 h-8 my-auto text-gray-200 bg-gray-700 border rounded-full shadow-md cursor-pointer hover:bg-gray-800"
             onClick={() => {
               props.setDarkmode(true);
             }}
           >
-            <MoonIcon className="m-auto w-4 h-4" />
+            <MoonIcon className="w-4 h-4 m-auto" />
           </div>
         </div>
       </div>

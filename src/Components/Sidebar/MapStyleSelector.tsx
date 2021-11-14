@@ -1,4 +1,4 @@
-import React from 'react';
+import type React from 'react';
 
 import { MapIcon } from '@heroicons/react/outline';
 
@@ -49,15 +49,15 @@ export function getDefaultMapStyle(
 
 const MapStyleSelector = (props: MapStyleSelectorProps) => {
   return (
-    <div className="flex bg-white dark:bg-gray-700 text-gray-600 dark:text-gray-100 h-10 shadow-md border rounded-md w-full md:w-72">
-      <div className="flex justify-between my-auto px-2 w-full">
+    <div className="flex w-full h-10 text-gray-600 bg-white border rounded-md shadow-md dark:bg-gray-700 dark:text-gray-100 md:w-72">
+      <div className="flex justify-between w-full px-2 my-auto">
         <div className="flex my-auto ">
-          <MapIcon className="w-5 h-5 mr-2 my-auto" />
-          <div className="text-lg my-auto">Map</div>
+          <MapIcon className="w-5 h-5 my-auto mr-2" />
+          <div className="my-auto text-lg">Map</div>
         </div>
         <div className="flex space-x-2">
           <div
-            className="flex my-auto h-8 w-8 rounded-full cursor-pointer hover:opacity-80 shadow-md"
+            className="flex w-8 h-8 my-auto rounded-full shadow-md cursor-pointer hover:opacity-80"
             onClick={() => {
               props.setMapStyle(MapStyles.Streets);
             }}
@@ -65,7 +65,7 @@ const MapStyleSelector = (props: MapStyleSelectorProps) => {
             <img src="/mapstyle_streets.png" />
           </div>
           <div
-            className="flex my-auto h-8 w-8 rounded-full cursor-pointer hover:opacity-80 shadow-md"
+            className="flex w-8 h-8 my-auto rounded-full shadow-md cursor-pointer hover:opacity-80"
             onClick={() => {
               props.setMapStyle(MapStyles.Outdoors);
             }}
@@ -73,7 +73,7 @@ const MapStyleSelector = (props: MapStyleSelectorProps) => {
             <img src="/mapstyle_outdoors.png" />
           </div>
           <div
-            className="flex my-auto h-8 w-8 rounded-full cursor-pointer hover:opacity-80 shadow-md"
+            className="flex w-8 h-8 my-auto rounded-full shadow-md cursor-pointer hover:opacity-80"
             onClick={() => {
               props.setMapStyle(
                 props.darkmode ? MapStyles.Dark : MapStyles.Light,
@@ -87,7 +87,7 @@ const MapStyleSelector = (props: MapStyleSelectorProps) => {
             )}
           </div>
           <div
-            className="flex my-auto h-8 w-8 rounded-full cursor-pointer hover:opacity-80 shadow-md"
+            className="flex w-8 h-8 my-auto rounded-full shadow-md cursor-pointer hover:opacity-80"
             onClick={() => {
               props.setMapStyle(MapStyles.Satellite);
             }}

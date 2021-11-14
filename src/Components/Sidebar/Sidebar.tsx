@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 
+import logoBlack from '/Mesh_Logo_Black.svg';
+import logoWhite from '/Mesh_Logo_White.svg';
 import type { position } from 'src/App';
 
 import {
@@ -9,8 +11,6 @@ import {
   MapIcon,
 } from '@heroicons/react/outline';
 
-import logoBlack from '../../../public/Mesh_Logo_Black.svg';
-import logoWhite from '../../../public/Mesh_Logo_White.svg';
 import type { NodeDataProperties } from '../DataTable/DataTable';
 import Coordinates from './Coordinates';
 import type { MapStyle } from './MapStyleSelector';
@@ -29,57 +29,65 @@ export interface SidebarProps {
 const Sidebar = (props: SidebarProps) => {
   const [activeElement, setActiveElement] = useState<React.ReactElement>();
   return (
-    <div
-      className="
-     flex flex-col md:flex-row relative md:h-full bg-white dark:bg-gray-700 shadow-md"
-    >
+    <div className="relative flex flex-col bg-white shadow-md md:flex-row md:h-full dark:bg-gray-700">
       <div className="h-full shadow-inner">{activeElement}</div>
-      <div className="m-1 flex flex-row md:flex-col">
-        <nav className="flex flex-row md:flex-col space-x-2 md:space-x-0 space-y-0 md:space-y-2">
-          <img
-            className="w-10 md:py-3"
-            src={props.darkmode ? logoWhite : logoBlack}
-          />
-          <div
-            className="flex group mx-auto bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-900 rounded-md cursor-pointer"
-            onClick={() => {
-              setActiveElement(<MQTT />);
-            }}
-          >
-            <ChatAltIcon className="w-10 h-10 p-2 my-auto text-gray-600 dark:text-gray-100 hover:text-gray-700 dark:hover:text-gray-200" />
-          </div>
-          <div
-            className="flex group mx-auto bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-900 rounded-md cursor-pointer"
-            onClick={() => {
-              console.log(activeElement);
+      <div className="flex flex-row m-1 md:flex-col">
+        <nav className="flex justify-between w-full gap-2 md:flex-col">
+          <div className="flex gap-2 md:flex-col">
+            <img
+              className="w-10 md:py-3"
+              src={props.darkmode ? logoWhite : logoBlack}
+            />
+            <div
+              className="flex mx-auto bg-gray-100 rounded-md cursor-pointer group dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-900"
+              onClick={() => {
+                setActiveElement(<MQTT />);
+              }}
+            >
+              <ChatAltIcon className="w-10 h-10 p-2 my-auto text-gray-600 dark:text-gray-100 hover:text-gray-700 dark:hover:text-gray-200" />
+            </div>
+            <div
+              className="flex mx-auto bg-gray-100 rounded-md cursor-pointer group dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-900"
+              onClick={() => {
+                console.log(activeElement);
 
-              setActiveElement(
-                <MapStyleSelector
-                  mapStyle={props.mapStyle}
-                  setMapStyle={props.setMapStyle}
-                  darkmode={props.darkmode}
-                />,
-              );
-            }}
-          >
-            <MapIcon className="w-10 h-10 p-2 my-auto text-gray-600 dark:text-gray-100 hover:text-gray-700 dark:hover:text-gray-200" />
-          </div>
+                setActiveElement(
+                  <MapStyleSelector
+                    mapStyle={props.mapStyle}
+                    setMapStyle={props.setMapStyle}
+                    darkmode={props.darkmode}
+                  />,
+                );
+              }}
+            >
+              <MapIcon className="w-10 h-10 p-2 my-auto text-gray-600 dark:text-gray-100 hover:text-gray-700 dark:hover:text-gray-200" />
+            </div>
 
-          <div
-            className="flex group mx-auto bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-900 rounded-md cursor-pointer"
-            onClick={() => {
-              setActiveElement(<Coordinates position={props.position} />);
-            }}
-          >
-            <LocationMarkerIcon className="w-10 h-10 p-2 my-auto text-gray-600 dark:text-gray-100 hover:text-gray-700 dark:hover:text-gray-200" />
+            <div
+              className="flex mx-auto bg-gray-100 rounded-md cursor-pointer group dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-900"
+              onClick={() => {
+                setActiveElement(<Coordinates position={props.position} />);
+              }}
+            >
+              <LocationMarkerIcon className="w-10 h-10 p-2 my-auto text-gray-600 dark:text-gray-100 hover:text-gray-700 dark:hover:text-gray-200" />
+            </div>
+            <div
+              className="flex mx-auto bg-gray-100 rounded-md cursor-pointer group dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-900"
+              onClick={() => {
+                props.setDarkmode(!props.darkmode);
+              }}
+            >
+              <ColorSwatchIcon className="w-10 h-10 p-2 my-auto text-gray-600 dark:text-gray-100 hover:text-gray-700 dark:hover:text-gray-200" />
+            </div>
           </div>
-          <div
-            className="flex group mx-auto bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-900 rounded-md cursor-pointer"
-            onClick={() => {
-              props.setDarkmode(!props.darkmode);
-            }}
-          >
-            <ColorSwatchIcon className="w-10 h-10 p-2 my-auto text-gray-600 dark:text-gray-100 hover:text-gray-700 dark:hover:text-gray-200" />
+          <div className="flex">
+            <a
+              href="https://vercel.com?utm_source=meshtastic&utm_campaign=oss"
+              target="_blank"
+              className="flex w-10 h-10 text-xl rounded-md hover:bg-gray-200 dark:hover:bg-gray-900"
+            >
+              <span className="m-auto">▲</span>
+            </a>
           </div>
         </nav>
       </div>
