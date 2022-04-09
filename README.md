@@ -1,3 +1,5 @@
+[![CLA assistant](https://cla-assistant.io/readme/badge/meshtastic/meshtastic-hub)](https://cla-assistant.io/meshtastic/meshtastic-hub)
+
 # Meshtastic Hub
 
 [![Open in Visual Studio Code](https://open.vscode.dev/badges/open-in-vscode.svg)](https://open.vscode.dev/meshtastic/meshtastic-hub)
